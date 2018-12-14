@@ -1,2 +1,2 @@
 # ExampleGit
-Dung thu source tree
+Luu source tam thoi cho du an LP5 cua lop FTJD1801
