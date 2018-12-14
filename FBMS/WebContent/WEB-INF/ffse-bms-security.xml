@@ -30,9 +30,9 @@
 		</session-management>
 	</http>
 	<beans:bean id="myUserDetailsService"
-		class="fasttrackse.ftse1801.fbms.service.security.UserServiceImpl"></beans:bean>
+		class="fasttrackse.ftjd1801.fbms.service.security.UserServiceImpl"></beans:bean>
 	<beans:bean id="customAuthenticationFailureHandler"
-		class="fasttrackse.ftse1801.fbms.controller.security.CustomAuthenticationFailureHandler"></beans:bean>
+		class="fasttrackse.ftjd1801.fbms.controller.security.CustomAuthenticationFailureHandler"></beans:bean>
 	<authentication-manager>
 		<authentication-provider
 			user-service-ref="myUserDetailsService">
