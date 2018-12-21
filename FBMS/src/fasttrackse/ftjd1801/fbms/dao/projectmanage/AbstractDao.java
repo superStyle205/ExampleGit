@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import java.lang.reflect.ParameterizedType;
 
-import javax.annotation.Resource;
-
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +23,7 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	private SessionFactory sessionFactory;
 
 	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
+		return sessionFactory.openSession();
 	}
 
 	public T getByKey(PK key) {

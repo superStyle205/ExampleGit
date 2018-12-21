@@ -29,13 +29,18 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> findAll(String customerName) {
-		return dao.findAll(customerName);
+	public List<Customer> findAll() {
+		return dao.findAll();
 	}
 
 	@Override
 	public List<Customer> findCustomer(int fromIndex, int toIndex, String search) {
 		return dao.findCustomer(fromIndex, toIndex, search);
+	}
+
+	@Override
+	public void update(Customer customer) {
+		dao.update(customer);
 	}
 
 }

@@ -31,9 +31,7 @@
 						  	<label>Email</label>
 						  	<form:input class="form-control" path="email" placeholder="Email" />
 						  	<label>Giới tính</label> <br>
-						  	<input type="radio" name="sex" value="male"> Nam 
-						 	<input type="radio" name="sex" value="female"> Nữ
-						 	<input type="radio" name="sex" value="other"> Other	<br>					 	
+				 			<form:input class="form-control" path="sex" placeholder="Giới tính" />				 			
 						</div>
 						<div class="form-group col-sm-6">						  	
 						  	<label>Số điện thoại</label>

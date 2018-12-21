@@ -47,10 +47,14 @@
 				</div>
 			</div>
 			<div class="content-header-right col-md-3 col-xs-12">
-               <div role="group" aria-label="Button group with nested dropdown" class="btn-group float-md-right" id="add-new">
-                  <a href="<c:url value = "/ProjectManagement/customer/add_form"/>" class="btn btn-primary"><span class="fa fa-plus"></span> Thêm mới</a>
-               </div>
-            </div>
+				<div role="group" aria-label="Button group with nested dropdown"
+					class="btn-group float-md-right" id="add-new">
+					<a
+						href="<c:url value = "/QuanLyDuAn/KhachHang/list-khachHang/add" />"
+						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
+						mới</a>
+				</div>
+			</div>
 		</div>
 		<!-- End Path -->
 
@@ -74,7 +78,7 @@
 				</div>
 			</c:if>
 			<!-- End Show message -->
-			
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="card">
@@ -98,51 +102,55 @@
 										class="table table-striped table-bordered dataex-res-constructor">
 										<thead>
 											<tr>
-											<th>Mã khách hàng</th>
-											<th>Tên khách hàng</th>
-											<th>Số điện thoại</th>
-											<th>Email</th>
-											<th>Giới tính</th>
-											<th>Địa chỉ</th>
-											<th>Ngày sinh</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-									<c:forEach items="${listCustomer}" var="customer">
-											<tr>
-												<td>${customer.idCustomer }</td>
-												<td>${customer.nameCustomer }</td>
-												<td>${customer.contact }</td>
-												<td>${customer.email }</td>
-												<td>${customer.sex }</td>
-												<td>${customer.address }</td>
-												<td>${customer.dayOfBirth }</td>
+												<th>Mã khách hàng</th>
+												<th>Tên khách hàng</th>
+												<th>Số điện thoại</th>
+												<th>Email</th>
+												<th>Giới tính</th>
+												<th>Địa chỉ</th>
+												<th>Ngày sinh</th>
+												<th></th>
 											</tr>
-									</c:forEach>
-												<div class="modal-dialog">
-													<div class="modal-content">
+										</thead>
+										<tbody>
+											<c:forEach items="${listCustomer}" var="customer">
+												<tr>
+													<td>${customer.idCustomer }</td>
+													<td>${customer.nameCustomer }</td>
+													<td>${customer.contact }</td>
+													<td>${customer.email }</td>
+													<td>${customer.sex }</td>
+													<td>${customer.address }</td>
+													<td>${customer.dayOfBirth }</td>
+													<td><a
+														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/edit/${customer.idCustomer}' />">edit</a></td>
+													<td><a
+														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/delete/${customer.idCustomer}' />">delete</a></td>
+												</tr>
+											</c:forEach>
+											<div class="modal-dialog">
+												<div class="modal-content">
 
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal"
-																aria-hidden="true">&times;</button>
-															<h4 class="modal-title" id="myModalLabel">Bạn có
-																chắc muốn xóa</h4>
-														</div>
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-hidden="true">&times;</button>
+														<h4 class="modal-title" id="myModalLabel">Bạn có chắc
+															muốn xóa</h4>
+													</div>
 
-														<div class="modal-body">
-															<p>Bạn có chắc muốn xóa</p>
-															<p class="debug-url"></p>
-														</div>
+													<div class="modal-body">
+														<p>Bạn có chắc muốn xóa</p>
+														<p class="debug-url"></p>
+													</div>
 
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default"
-																data-dismiss="modal">Quay lại</button>
-															<a class="btn btn-danger btn-ok">Xóa</a>
-														</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-default"
+															data-dismiss="modal">Quay lại</button>
+														<a class="btn btn-danger btn-ok">Xóa</a>
 													</div>
 												</div>
-											
+											</div>
+											</div>
 										</tbody>
 									</table>
 								</div>

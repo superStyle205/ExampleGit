@@ -8,11 +8,13 @@ public interface CustomerDao {
 
 	void saveCustomer(Customer customer);
 
+	void update(Customer customer);
+
 	void delete(int id);
 
 	Customer findByIdCustomer(int id);
-		
-	List<Customer> findAll(String customerName);
+
+	List<Customer> findAll();
 
 	List<Customer> findCustomer(int fromIndex, int toIndex, String search);
 

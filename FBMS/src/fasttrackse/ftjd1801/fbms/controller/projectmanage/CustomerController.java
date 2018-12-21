@@ -2,8 +2,6 @@ package fasttrackse.ftjd1801.fbms.controller.projectmanage;
 
 import java.util.List;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,58 +23,11 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping(value = {"","/"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewCustomer(Model model) {
-		int page = 1;
-		int recordsPerPage = 3;
-		int recordStart = (page - 1) * recordsPerPage;
-		int recordEnd = recordStart + recordsPerPage;
-
-		List<Customer> listAll = customerService.findAll(search);
-		if (listAll.size() < recordEnd) {
-			recordEnd = listAll.size();
-		}
-		List<Customer> list = customerService.findCustomer(recordStart, recordEnd, search);
-
-		int nOfPages = (int) Math.ceil((double) list.size() / recordsPerPage);
-
-		model.addAttribute("noOfPages", nOfPages);
-		model.addAttribute("pageid", page);
-		model.addAttribute("listCustomer", list);
-
+		List<Customer> listAll = customerService.findAll();
+		model.addAttribute("listCustomer", listAll);
 		return "/QuanLyDuAn/khachhang/list";
-	}
-
-	@RequestMapping(value = "/view/{customerName}", method = RequestMethod.GET)
-	public String viewOneCustomer(@PathParam("customerName") String customerName, Model model) {
-		model.addAttribute("customer", customerService.findAll(customerName));
-		return "/QuanLyDuAn/KhachHang/list-khachHang/viewOne";
-	}
-
-	@RequestMapping(value = { "search" }, method = RequestMethod.POST)
-	public String search(@PathParam(value = "search") String searchName) {
-		search = searchName;
-		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
-	}
-
-	@RequestMapping(value = "/view/getListCustomer/{page}", method = RequestMethod.GET)
-	public String getListCustomer(Model model, @PathVariable int page) {
-		int recordsPerPage = 3;
-		int recordStart = (page - 1) * recordsPerPage;
-		int recordEnd = recordStart + recordsPerPage;
-
-		List<Customer> listAllCustomer = customerService.findAll(search);
-		if (listAllCustomer.size() < recordEnd) {
-			recordEnd = listAllCustomer.size();
-		}
-		List<Customer> listCustomer = customerService.findCustomer(recordStart, recordEnd, search);
-
-		int nOfPages = (int) Math.ceil((double) listAllCustomer.size() / recordsPerPage);
-
-		model.addAttribute("noOfPages", nOfPages);
-		model.addAttribute("pageid", page);
-		model.addAttribute("listCustomer", listCustomer);
-		return "/QuanLyDuAn/KhachHang/list-khachHang/list";
 	}
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
@@ -86,9 +37,15 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String doAdd(Model model, @ModelAttribute("customer") Customer ct) {
+	public String doAdd(Model model, @ModelAttribute("customer") Customer ct,
+			final RedirectAttributes redirectAttributes) {
+		try {
 			customerService.saveCustomer(ct);
-		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang/list/1";
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công..");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
+		}
+		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 	}
 
 	@RequestMapping(value = "/edit/{idCustomer}", method = RequestMethod.GET)
@@ -98,14 +55,25 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/edit/{idCustomer}", method = RequestMethod.POST)
-	public String doEdit(Model model, @ModelAttribute("customer") Customer ct) {
-			customerService.saveCustomer(ct);
+	public String doEdit(Model model, @ModelAttribute("customer") Customer ct,
+			final RedirectAttributes redirectAttributes) {
+		try {
+			customerService.update(ct);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
+		}
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 	}
 
 	@RequestMapping(value = "/delete/{idCustomer}", method = RequestMethod.GET)
-	public String delete(@PathVariable("idCustomer") int idCustomer) {
+	public String delete(@PathVariable("idCustomer") int idCustomer, final RedirectAttributes redirectAttributes) {
+		try {
 			customerService.delete(idCustomer);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
+		}
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 
 	}
