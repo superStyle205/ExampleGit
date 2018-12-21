@@ -56,7 +56,7 @@
 			</div>
 			<div class="content-header-right col-md-3 col-xs-12">
                <div role="group" aria-label="Button group with nested dropdown" class="btn-group float-md-right" id="add-new">
-                  <a href="<c:url value = "/QuanTriHeThong/phong_ban/add"/>" class="btn btn-primary"><span class="fa fa-plus"></span> Thêm mới</a>
+                  <a href="<c:url value = "/ProjectManagement/customer/add_form"/>" class="btn btn-primary"><span class="fa fa-plus"></span> Thêm mới</a>
                </div>
             </div>
 		</div>
