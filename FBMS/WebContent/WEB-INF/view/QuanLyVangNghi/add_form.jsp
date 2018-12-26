@@ -24,7 +24,7 @@
 		<div class="content-body">
 			<div class="main-content">
 				<div class="row">
-					<form:form method="POST" modelAttribute="registrationLeave" action="">
+					<form:form method="POST" modelAttribute="registrationLeave" id="formVangNghi" action="" >
 						<div class="form-group col-sm-6">
 						  	<label>Ma nhan vien</label>
 						  	<form:input class="form-control" path="idEmployee" placeholder="Mã nhan vien" />
@@ -33,17 +33,26 @@
 						<div class="form-group col-sm-6">
 						  	<label>Loai nghi phep</label>
 						  	<form:input class="form-control" path="typeOfLeave" placeholder="Loai nghi phep" />
-						  	
 						</div>
 						<div class="form-group col-sm-6">
-							<label>Start date:</label>
+							<label>Date:</label>
 							<form:input class="form-control" type="date" path="day"/>
 						</div>
 						<div class="form-group col-sm-6">
-							<label>End date:</label>
-							<form:input class="form-control" type="date" path="day"/>
+							<label>to date:</label>
+							<form:input class="form-control" type="date" path="toDay"/>
 						</div>
-						
+						<div class="form-group col-sm-6">
+						  	<label>Tổng ngày nghĩ</label>
+						  	<form:input class="form-control" path="totalDay" placeholder="Tổng ngày nghĩ" />
+						</div>
+						<div class="form-group col-sm-6">
+						  	<label>Trạng thái</label>
+						  	<select  class="form-control" name="status" id="formVangNghi">
+							  <option value="Nháp">Nháp</option>
+							  <option value="Chờ duyệt">Chờ duyệt</option>
+							</select>
+						</div>			
 						<div class="col-sm-12 text-center">
 							<button type="submit" class="btn btn-success">Lưu thông tin</button>
 						</div>
