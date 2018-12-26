@@ -18,7 +18,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public Customer findByIdCustomer(int id) {
 		return getByKey(id);
@@ -37,7 +37,8 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
 		Transaction tx = session.beginTransaction();
 		session.persist(customer);
 		tx.commit();
-		session.close();	}
+		session.close();
+	}
 
 	@Override
 	public void delete(int id) {

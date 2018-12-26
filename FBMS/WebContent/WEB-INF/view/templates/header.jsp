@@ -311,15 +311,11 @@
 							href="<c:url value="/QuanLyDuAn/TrangThai/list-trangThai" />">Trạng
 								Thái</a></li>
 						<li class=""><a class="menu-item"
-							href="<c:url value="/QuanLyDuAn/Vendor/list-vendor" />">Vendor</a></li>
-						<li class=""><a class="menu-item"
 							href="<c:url value="/QuanLyDuAn/Database/list-database" />">Database</a></li>
 					</ul></li>
 				<li class="nav-item has-sub"><a href="#"><i class="ft-box"></i><span
 						class="menu-title" data-i18n="">Quản lý Dự Án</span></a>
 					<ul class="menu-content" style="">
-						<li class=""><a class="menu-item"
-							href="<c:url value="/QuanLyDuAn/DuAn/" />">Thông Tin Dự Án</a></li>
 						<li class=""><a class="menu-item"
 							href="<c:url value="/QuanLyDuAn/DuAn/" />">Danh Sách Dự Án</a></li>
 

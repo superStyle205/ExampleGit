@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="/WEB-INF/view/templates/header.jsp" />
 <style>
 .tbl_actions a {
@@ -110,6 +111,7 @@
 												<th>Địa chỉ</th>
 												<th>Ngày sinh</th>
 												<th></th>
+
 											</tr>
 										</thead>
 										<tbody>
@@ -121,35 +123,41 @@
 													<td>${customer.email }</td>
 													<td>${customer.sex }</td>
 													<td>${customer.address }</td>
-													<td>${customer.dayOfBirth }</td>
+													<td><fmt:formatDate value="${customer.dayOfBirth }"
+															pattern="dd-MM-yyyy" /></td>
+
 													<td><a
-														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/edit/${customer.idCustomer}' />">edit</a></td>
-													<td><a
-														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/delete/${customer.idCustomer}' />">delete</a></td>
+														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/edit/${customer.idCustomer}' />"><i
+															class='fa fa-pencil'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/delete/${customer.idCustomer}' />"><i
+															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
-											<div class="modal-dialog">
-												<div class="modal-content">
+											<div class="modal fade" id="confirm-delete" tabindex="-1"
+												role="dialog" aria-labelledby="myModalLabel"
+												aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
 
-													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal"
-															aria-hidden="true">&times;</button>
-														<h4 class="modal-title" id="myModalLabel">Bạn có chắc
-															muốn xóa</h4>
-													</div>
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal"
+																aria-hidden="true">&times;</button>
+															<h4 class="modal-title" id="myModalLabel">Bạn có
+																chắc muốn xóa</h4>
+														</div>
 
-													<div class="modal-body">
-														<p>Bạn có chắc muốn xóa</p>
-														<p class="debug-url"></p>
-													</div>
+														<div class="modal-body">
+															<p>Bạn có chắc muốn xóa</p>
+															<p class="debug-url"></p>
+														</div>
 
-													<div class="modal-footer">
-														<button type="button" class="btn btn-default"
-															data-dismiss="modal">Quay lại</button>
-														<a class="btn btn-danger btn-ok">Xóa</a>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-default"
+																data-dismiss="modal">Quay lại</button>
+															<a class="btn btn-danger btn-ok">Xóa</a>
+														</div>
 													</div>
 												</div>
-											</div>
 											</div>
 										</tbody>
 									</table>

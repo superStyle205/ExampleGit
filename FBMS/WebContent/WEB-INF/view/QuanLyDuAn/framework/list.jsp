@@ -34,8 +34,14 @@
 	min-width: 100px;
 	text-align: center !important;
 }
-#datatable > thead > tr > th:last-child[class*="sort"]::after{content: ""}
-#datatable > thead > tr > th:last-child[class*="sort"]::before{content: ""}
+
+#datatable>thead>tr>th:last-child[class*="sort"]::after {
+	content: ""
+}
+
+#datatable>thead>tr>th:last-child[class*="sort"]::before {
+	content: ""
+}
 </style>
 <div class="app-content content container-fluid">
 	<div class="content-wrapper">
@@ -43,22 +49,25 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-9 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Danh sách phòng ban</h3>
+				<h3 class="content-header-title mb-0">Danh sách framework</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
 								href='<c:url value="/home" />'>Home</a></li>
-							<li class="breadcrumb-item active">Danh sách phòng ban</li>
+							<li class="breadcrumb-item active">Danh sách framework</li>
 						</ol>
 					</div>
 				</div>
 			</div>
 			<div class="content-header-right col-md-3 col-xs-12">
-               <div role="group" aria-label="Button group with nested dropdown" class="btn-group float-md-right" id="add-new">
-                  <a href="<c:url value = "/QuanTriHeThong/phong_ban/add"/>" class="btn btn-primary"><span class="fa fa-plus"></span> Thêm mới</a>
-               </div>
-            </div>
+				<div role="group" aria-label="Button group with nested dropdown"
+					class="btn-group float-md-right" id="add-new">
+					<a href="<c:url value = "/QuanLyDuAn/Framework/list-framework/add"/>"
+						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
+						mới</a>
+				</div>
+			</div>
 		</div>
 		<!-- End Path -->
 
@@ -82,12 +91,12 @@
 				</div>
 			</c:if>
 			<!-- End Show message -->
-			
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Danh sách phòng ban</h4>
+							<h4 class="card-title">Danh sách framework</h4>
 							<a class="heading-elements-toggle"><i
 								class="fa fa-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -106,12 +115,25 @@
 										class="table table-striped table-bordered dataex-res-constructor">
 										<thead>
 											<tr>
-											<th>Mã phòng ban</th>
-											<th>Tên phòng ban</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
+												<th>Mã framework</th>
+												<th>Tên framework</th>
+												<th>Mô tả</th>
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach items="${listFramework}" var="framework">
+												<tr>
+													<td>${framework.idFramework }</td>
+													<td>${framework.technology }</td>
+													<td>${framework.describes }</td>
+													<td><a
+														href="<c:url value='/QuanLyDuAn/Framework/list-framework/edit/${framework.idFramework}' />">edit</a></td>
+													<td><a
+														href="<c:url value='/QuanLyDuAn/Framework/list-framework/delete/${framework.idFramework}' />">delete</a></td>
+												</tr>
+											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"
 												role="dialog" aria-labelledby="myModalLabel"
 												aria-hidden="true">
@@ -150,26 +172,6 @@
 	</div>
 </div>
 <script type="text/javascript">
-	window.onload = function() {
-		$('#confirm-delete').on(
-				'show.bs.modal',
-				function(e) {
-					$(this).find('.btn-ok').attr('href',
-							$(e.relatedTarget).data('href'));
-				});
-
-		$('#datatable').dataTable().fnDestroy();
-
-		$("#datatable")
-				.dataTable(
-						{
-							responsive : true,
-							"order" : [ [ 1, "asc" ], [ 0, "desc" ] ],
-							"bServerSide" : true,
-							"sAjaxSource" : "/FBMS/QuanTriHeThong/phong_ban/view/getListPhongBan",
-						});
-	};
-
 	window.setTimeout(function() {
 		$(".alert").fadeTo(500, 0).slideUp(500, function() {
 			$(this).remove();
