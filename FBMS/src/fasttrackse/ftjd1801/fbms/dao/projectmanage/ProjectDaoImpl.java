@@ -11,60 +11,61 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import fasttrackse.ftjd1801.fbms.entity.projectmanage.ProgramingLanguage;
+import fasttrackse.ftjd1801.fbms.entity.projectmanage.Project;
 
 @Repository
-public class ProgramingLanguageDaoImpl extends AbstractDao<Integer, ProgramingLanguage>
-		implements ProgramingLanguageDao {
+public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements ProjectDao {
+
 	@Autowired
-	private SessionFactory sessionFactory;
+	SessionFactory sessionFactory;
 
 	@Override
-	public ProgramingLanguage findById(int id) {
+	public Project findById(int id) {
 		return getByKey(id);
 	}
 
 	@Override
-	public void addNew(ProgramingLanguage pl) {
+	public void addNew(Project project) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.persist(pl);
+		session.persist(project);
 		tx.commit();
 		session.close();
 	}
 
 	@Override
-	public void update(ProgramingLanguage pl) {
+	public void update(Project project) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.update(pl);
+		session.update(project);
 		tx.commit();
 		session.close();
+
 	}
 
 	@Override
 	public void delete(int id) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.delete(session.get(ProgramingLanguage.class, id));
+		session.delete(session.get(Project.class, id));
 		tx.commit();
 		session.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProgramingLanguage> findAll() {
+	public List<Project> listAll() {
 		Criteria criteria = createEntityCriteria();
-		return (List<ProgramingLanguage>) criteria.list();
+		return (List<Project>) criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProgramingLanguage> findProgramingLanguage(int fromIndex, int toIndex, String search) {
+	public List<Project> findProject(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("name_language", "%" + search + "%");
 		criteria.add(cond);
-		return (List<ProgramingLanguage>) criteria.list();
+		return (List<Project>) criteria.list().subList(fromIndex, toIndex);
 	}
 
 }

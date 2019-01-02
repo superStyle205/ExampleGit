@@ -27,7 +27,7 @@
 
 		<div class="content-body">
 			<div class="main-content">
-				<form:form method="POST" modelAttribute="domain" action="">
+				<form:form method="POST" modelAttribute="project" action="">
 					<div class="row">
 						<div class="form-group col-sm-12">
 							<label>Tên dự án</label>
@@ -51,9 +51,8 @@
 								placeholder="End date *">
 						</div>
 						<div class="form-group col-md-3 col-sm-12">
-							<label>Chọn phòng dự án</label>
-							<select>
-								<option> </option>
+							<label>Chọn phòng dự án</label> <select>
+								<option></option>
 							</select>
 						</div>
 					</div>
@@ -70,10 +69,14 @@
 						<div class="col-sm-12 col-md-3">
 							<label>Programing Language</label>
 						</div>
-						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-success">Lưu thông
-								tin</button>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 col-md-3">
 						</div>
+					</div>
+					<div class="col-sm-12 text-center">
+						<button type="submit" class="btn btn-success">Lưu thông
+							tin</button>
 					</div>
 				</form:form>
 			</div>
