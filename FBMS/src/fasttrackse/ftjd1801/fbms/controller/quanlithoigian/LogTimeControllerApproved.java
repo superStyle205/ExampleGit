@@ -1,5 +1,6 @@
 package fasttrackse.ftjd1801.fbms.controller.quanlithoigian;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,9 @@ import fasttrackse.ftjd1801.fbms.entity.quanlithoigian.LogTime;
 import fasttrackse.ftjd1801.fbms.service.quanlithoigian.LogTimeService;
 
 @Controller
-@RequestMapping("/QuanLyThoiGian/nhanVien")
-public class LogTimeControllerDraft {
+@RequestMapping("/QuanLyThoiGian/pheDuyet")
+public class LogTimeControllerApproved {
 
-	private static final String UPLOAD_DIRECTORY = "E:\\upload";
 	String search = "";
 	@Autowired
 	LogTimeService service;
@@ -25,29 +25,11 @@ public class LogTimeControllerDraft {
 	@Autowired
 	MessageSource message;
 	
-	@RequestMapping(value = { "danhsachnhap/{nPage}" }, method = RequestMethod.GET)
-	public String listLogTimes(ModelMap model, @PathVariable int nPage) {
-		int perPage = 4;
-		int currentPage = (nPage - 1) * perPage;
-		int recordEnd = currentPage + perPage;
+	
 
-		List<LogTime> listAllLogTimes = service.findAllLogTimes(search);
-		if (listAllLogTimes.size() < recordEnd) {
-			recordEnd = listAllLogTimes.size();
-		}
-		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd,search);
-
-		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("crPage", nPage);
-		model.addAttribute("LogTimes", LogTimes);
-
-		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachNhap/list";
-	}
-
-	@RequestMapping(value = {"/", "danhsachnhap" }, method = RequestMethod.GET)
+	@RequestMapping(value = {"danhsachchopheduyet" }, method = RequestMethod.GET)
 	public String listLogTimes(ModelMap model) {
+		List<LogTime> listLog=new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -60,11 +42,48 @@ public class LogTimeControllerDraft {
 		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
+		
+		for(int i=0;i<listAllLogTimes.size();i++) {
+			if(listAllLogTimes.get(i).getStatus()==6) {
+				listLog.add(listAllLogTimes.get(i));
+			}
+		}
 
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("crPage", nPage);
-		model.addAttribute("LogTimes", listAllLogTimes);
+		model.addAttribute("LogTimes", listLog);
 
-		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachNhap/list";
+		return "QuanLyThoiGian/PheDuyet/DanhSachChoPheDuyet/list";
+	}
+	
+	
+
+	@RequestMapping( value = {"/", "danhsachpheduyet" } , method = RequestMethod.GET)
+	public String listLogTimes6(ModelMap model) {
+		List<LogTime> listLog=new ArrayList<LogTime>();
+		int nPage = 1;
+		int perPage = 4;
+		int currentPage = (nPage - 1) * perPage;
+		int recordEnd = currentPage + perPage;
+
+		List<LogTime> listAllLogTimes = service.findAllLogTimes();
+		if (listAllLogTimes.size() < recordEnd) {
+			recordEnd = listAllLogTimes.size();
+		}
+		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
+
+		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
+		
+		for(int i=0;i<listAllLogTimes.size();i++) {
+			if(listAllLogTimes.get(i).getStatus()==3) {
+				listLog.add(listAllLogTimes.get(i));
+			}
+		}
+
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("crPage", nPage);
+		model.addAttribute("LogTimes", listLog);
+
+		return "QuanLyThoiGian/PheDuyet/DanhSachDaPheDuyet/list";
 	}
 }

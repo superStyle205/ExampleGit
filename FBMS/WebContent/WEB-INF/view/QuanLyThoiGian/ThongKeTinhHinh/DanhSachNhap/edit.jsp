@@ -7,13 +7,13 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-6 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Thêm mới Log thời gian</h3>
+				<h3 class="content-header-title mb-0">Chỉnh sửa Log</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item"><a href='<c:url value="/QuanLyThoiGian/nhanVien/" />'>Danh sách Log thời gian</a></li>
-							<li class="breadcrumb-item active">Thêm mới Log thời gian</li>
+							<li class="breadcrumb-item active">Chỉnh sửa log</li>
 						</ol>
 					</div>
 				</div>

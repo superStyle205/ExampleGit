@@ -28,13 +28,13 @@ public class LogTime implements java.io.Serializable {
 	private String describes;
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date dayLog;
-	private String status;
+	private int status;
 
 	public LogTime() {
 	}
 
 	public LogTime(Integer idEmployee, Integer idProject, String role, Integer time, String describes, Date dayLog,
-			String status) {
+			int status) {
 		this.idEmployee = idEmployee;
 		this.idProject = idProject;
 		this.role = role;
@@ -112,11 +112,11 @@ public class LogTime implements java.io.Serializable {
 	}
 
 	@Column(name = "status", length = 65535)
-	public String getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
