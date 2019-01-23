@@ -12,59 +12,86 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Project;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.DatabaseService;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.DomainService;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.FrameworkService;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.ProgramingLanguageService;
 import fasttrackse.ftjd1801.fbms.service.projectmanage.ProjectService;
 
 @Controller
-@RequestMapping(value="/QuanLyDuAn/DuAn")
+@RequestMapping(value = "/QuanLyDuAn/DuAn")
 public class ProjectController {
 	@Autowired
-	ProjectService service;
+	ProjectService projectService;
+	@Autowired
+	DatabaseService databaseService;
+	@Autowired
+	FrameworkService frameworkService;
+	@Autowired
+	ProgramingLanguageService languageService;
+	@Autowired
+	DomainService domainService;
 	
-	@RequestMapping(value= {"","/"},method = RequestMethod.GET)
+	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewProject(Model model) {
-		List<Project> list = service.listAll();
-		model.addAttribute("listProject",list);
+		List<Project> list = projectService.listAll();
+		model.addAttribute("listProject", list);
 		return "QuanLyDuAn/duan/list";
 	}
-	
-	@RequestMapping(value="/add",method=RequestMethod.GET)
+
+	@RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+	public String viewOne(@PathVariable("id") int id, Model model) {
+		model.addAttribute("project", projectService.findById(id));
+		return "QuanLyDuAn/duan/viewOne";
+	}
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addForm(Model model) {
-		model.addAttribute("project",new Project());
+		model.addAttribute("project", new Project());
+		model.addAttribute("listDomain", domainService.findAll());
+		model.addAttribute("database", databaseService.findAll());
+		model.addAttribute("framework", frameworkService.findAll());
+		model.addAttribute("Language", languageService.findAll());
 		return "QuanLyDuAn/duan/add_form";
 	}
-	
-	@RequestMapping(value="/add",method=RequestMethod.POST)
-	public String doAdd(Model model,@ModelAttribute("project") Project project,final RedirectAttributes redirectAttributes) {
+
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public String doAdd(Model model, @ModelAttribute("project") Project project,
+			final RedirectAttributes redirectAttributes) {
 		try {
-			service.addNew(project);
-			redirectAttributes.addFlashAttribute("messageSuccess","Thành công ...");
+			projectService.addNew(project);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công ...");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError","Lỗi. Thử lại..");
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Thử lại..");
 		}
 		return "redirect:/QuanLyDuAn/DuAn/";
 	}
-	@RequestMapping(value="/edit/{id}",method=RequestMethod.GET)
-	public String editForm(@PathVariable("id") int id,Model model) {
-		model.addAttribute(service.findById(id));
+
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String editForm(@PathVariable("id") int id, Model model) {
+		model.addAttribute(projectService.findById(id));
 		return "QuanLyDuAn/duan/edit_form";
 	}
-	@RequestMapping(value="edit/{id}",method=RequestMethod.POST)
-	public String doEdit(Model model,@ModelAttribute("project")Project project,final RedirectAttributes redirectAttributes) {
+
+	@RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+	public String doEdit(Model model, @ModelAttribute("project") Project project,
+			final RedirectAttributes redirectAttributes) {
 		try {
-			service.update(project);
+			projectService.update(project);
 			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công....");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError","Lỗi, xin thử lại");
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi, xin thử lại");
 		}
 		return "redirect:/QuanLyDuAn/DuAn";
 	}
-	@RequestMapping(value="delete/{id}",method=RequestMethod.GET)
-	public String delete (@PathVariable("id") int id,final RedirectAttributes redirectAttributes) {
+
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
 		try {
-			service.delete(id);
-			redirectAttributes.addFlashAttribute("messageSuccess","Thành công ..");
+			projectService.delete(id);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công ..");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError","Lỗi, xin thử lại ..");
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi, xin thử lại ..");
 		}
 		return "redirect:/QuanLyDuAn/DuAn";
 	}

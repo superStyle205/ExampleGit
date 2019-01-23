@@ -118,7 +118,6 @@
 												<th>Mã domain</th>
 												<th>Tên domain</th>
 												<th></th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -127,9 +126,10 @@
 													<td>${domain.idDomain }</td>
 													<td>${domain.nameDomain }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/Domain/list-domain/edit/${domain.idDomain}' />">edit</a></td>
-													<td><a
-														href="<c:url value='/QuanLyDuAn/Domain/list-domain/delete/${domain.idDomain}' />">delete</a></td>
+														href="<c:url value='/QuanLyDuAn/Domain/list-domain/edit/${domain.idDomain}' />"><i
+															class='fa fa-pencil'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/Domain/list-domain/delete/${domain.idDomain}' />"><i
+															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"

@@ -13,7 +13,7 @@ public interface DomainService {
 
 	public void delete(int maDomain);
 
-	public Domain findByMaChucDanh(int maDomain);
+	public Domain findByMaDomain(int maDomain);
 
 	public List<Domain> findAll(int fromIndex, int toIndex, String search);
 }

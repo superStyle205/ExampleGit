@@ -35,7 +35,7 @@ public class DomainServiceImpl implements DomainService {
 	}
 
 	@Override
-	public Domain findByMaChucDanh(int maDomain) {
+	public Domain findByMaDomain(int maDomain) {
 		return domainDao.findByMaDomain(maDomain);
 	}
 

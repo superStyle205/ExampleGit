@@ -25,20 +25,58 @@ public class CustomerController {
 
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewCustomer(Model model) {
+		int page = 1;
+		int recordsPerPage = 3;
+		int recordStart = (page - 1) * recordsPerPage;
+		int recordEnd = recordStart + recordsPerPage;
+		int nOfPages;
 		List<Customer> listAll = customerService.findAll();
-		model.addAttribute("listCustomer", listAll);
+		if (listAll.size() < recordEnd) {
+			recordEnd = listAll.size();
+		}
+		List<Customer> listCustomer = customerService.findCustomer(recordStart, recordEnd, search);
+		if (recordEnd == 0) {
+			nOfPages = 1;
+		} else {
+			nOfPages = (int) Math.ceil((double) listAll.size() / recordsPerPage);
+		}
+		model.addAttribute("noOfPages", nOfPages);
+		model.addAttribute("pageid", page);
+		model.addAttribute("listCustomer", listCustomer);
+
 		return "/QuanLyDuAn/khachhang/list";
+	}
+
+	@RequestMapping(value = { "/{page}" }, method = RequestMethod.GET)
+	public String list(ModelMap model, @PathVariable int page) {
+		int recordsPerPage = 3;
+		int recordStart = (page - 1) * recordsPerPage;
+		int recordEnd = recordStart + recordsPerPage;
+		List<Customer> listAll = customerService.findAll();
+		if (listAll.size() < recordEnd) {
+			recordEnd = listAll.size();
+		}
+		List<Customer> listCustomer = customerService.findCustomer(recordStart, recordEnd, search);
+		int nOfPages = (int) Math.ceil((double) listAll.size() / recordsPerPage);
+		model.addAttribute("noOfPages", nOfPages);
+		model.addAttribute("pageid", page);
+		model.addAttribute("listCustomer", listCustomer);
+
+		return "/QuanLyDuAn/khachhang/list";
+
 	}
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
 	public String addForm(ModelMap model) {
 		model.addAttribute("customer", new Customer());
-		return "/QuanLyDuAn/khachhang/add_form";
+		model.addAttribute("edit", false);
+		return "/QuanLyDuAn/khachhang/form";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String doAdd(Model model, @ModelAttribute("customer") Customer ct,
 			final RedirectAttributes redirectAttributes) {
+
 		try {
 			customerService.saveCustomer(ct);
 			redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công..");
@@ -46,12 +84,15 @@ public class CustomerController {
 			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
 		}
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
+
 	}
 
 	@RequestMapping(value = "/edit/{idCustomer}", method = RequestMethod.GET)
 	public String editForm(@PathVariable("idCustomer") int idCustomer, Model model) {
 		model.addAttribute("customer", customerService.findByIdCustomer(idCustomer));
-		return "QuanLyDuAn/khachhang/edit_form";
+		model.addAttribute("edit", true);
+
+		return "QuanLyDuAn/khachhang/form";
 	}
 
 	@RequestMapping(value = "/edit/{idCustomer}", method = RequestMethod.POST)
@@ -67,7 +108,14 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/delete/{idCustomer}", method = RequestMethod.GET)
-	public String delete(@PathVariable("idCustomer") int idCustomer, final RedirectAttributes redirectAttributes) {
+	public String delete(@PathVariable("idCustomer") int idCustomer, ModelMap model) {
+		model.addAttribute("customer", customerService.findByIdCustomer(idCustomer));
+		model.addAttribute("delete", true);
+		return "QuanLyDuAn/khachhang/form";
+	}
+
+	@RequestMapping(value = "/delete/{idCustomer}", method = RequestMethod.POST)
+	public String doDelete(@PathVariable("idCustomer") int idCustomer, final RedirectAttributes redirectAttributes) {
 		try {
 			customerService.delete(idCustomer);
 			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
@@ -75,6 +123,6 @@ public class CustomerController {
 			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
 		}
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
-
 	}
+
 }

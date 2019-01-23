@@ -49,13 +49,13 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-9 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Danh sách database</h3>
+				<h3 class="content-header-title mb-0">Danh sách dự án</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
 								href='<c:url value="/home" />'>Home</a></li>
-							<li class="breadcrumb-item active">Danh sách database</li>
+							<li class="breadcrumb-item active">Danh sách dự án</li>
 						</ol>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a href="<c:url value = "/QuanLyDuAn/Database/list-database/add"/>"
+					<a href="<c:url value = "/QuanLyDuAn/DuAn/add"/>"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -96,7 +96,7 @@
 				<div class="col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Danh sách database</h4>
+							<h4 class="card-title">Danh sách dự án</h4>
 							<a class="heading-elements-toggle"><i
 								class="fa fa-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -115,19 +115,20 @@
 										class="table table-striped table-bordered dataex-res-constructor">
 										<thead>
 											<tr>
-												<th>Mã Database</th>
-												<th>Tên Database</th>
+												<th>Mã vai trò</th>
+												<th>Tên vai trò</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${listDatabase}" var="database">
+											<c:forEach items="${listRole}" var="role">
 												<tr>
-													<td>${database.idDatabase }</td>
-													<td>${database.nameDatabase }</td>
+													<td>${role.idRole }</td>
+													<td>${role.role }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/Database/list-database/edit/${database.idDatabase}' />"><i class='fa fa-pencil'></i></a>
-															<a href="<c:url value='/QuanLyDuAn/Database/list-database/delete/${database.idDatabase}' />"><i class='fa fa-trash'></i></a></td>
+														href="<c:url value='/QuanLyDuAn/VaiTro/list-vaiTro/edit/${role.idRole}' />"><i class='fa fa-pencil'></i></a>
+													<a
+														href="<c:url value='/QuanLyDuAn/VaiTro/list-vaiTro/delete/${role.idRole}' />"><i class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"
@@ -158,75 +159,6 @@
 											</div>
 										</tbody>
 									</table>
-									<ul class="pagination" style="margin-left: 65%;">
-										<c:if test="${pageid != 1}">
-											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/Database/list-database/1">Fisrt
-													page</a></li>
-											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/Database/list-database/${pageid -1 }">Previous
-													page</a></li>
-										</c:if>
-										<c:choose>
-											<c:when test="${noOfPages eq 1}">
-												<li class="page-item active"><a class="page-link"
-													href="#">1</a></li>
-											</c:when>
-											<c:when test="${noOfPages eq 2}">
-												<c:choose>
-													<c:when test="${pageid eq 1}">
-														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid}">1</a></li>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid+1}">2</a></li>
-													</c:when>
-													<c:when test="${pageid eq 2}">
-														<li class="page-item "><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid-1}">1</a></li>
-														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid} ">2</a></li>
-													</c:when>
-												</c:choose>
-
-											</c:when>
-											<c:otherwise>
-												<c:choose>
-													<c:when test="${pageid eq 1}">
-														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid} ">${pageid}</a></li>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid+1} ">${pageid+1}</a></li>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid+2} ">${pageid+2}</a>
-													</c:when>
-													<c:when test="${pageid eq noOfPages}">
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid-2} ">${pageid-2}</a></li>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid-1} ">${pageid-1}</a></li>
-														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid} ">${pageid}</a>
-													</c:when>
-													<c:otherwise>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid-1} ">${pageid-1}</a></li>
-														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid} ">${pageid}</a></li>
-														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/Database/list-database/${pageid+1} ">${pageid+1}</a></li>
-													</c:otherwise>
-												</c:choose>
-											</c:otherwise>
-										</c:choose>
-										<c:if test="${pageid lt noOfPages}">
-											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/Database/list-database/${pageid+1}">Next
-													page</a></li>
-											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/Database/list-database/${noOfPages} ">Last
-													page</a></li>
-										</c:if>
-									</ul>
 								</div>
 							</div>
 						</div>
