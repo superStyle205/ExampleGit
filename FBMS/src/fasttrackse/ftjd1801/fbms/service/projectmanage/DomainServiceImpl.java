@@ -14,8 +14,8 @@ public class DomainServiceImpl implements DomainService {
 	private DomainDao domainDao;
 
 	@Override
-	public List<Domain> findAll() {
-		return domainDao.findAll();
+	public List<Domain> findAll(String search) {
+		return domainDao.findAll(search);
 	}
 
 	@Override

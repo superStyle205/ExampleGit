@@ -44,6 +44,12 @@
 								href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item active">Danh sách khách hàng</li>
 						</ol>
+						<form action="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/search" method="GET">
+							<input type="text" name="searchName" placeholder="Search...">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>

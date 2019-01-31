@@ -13,7 +13,7 @@ public interface FrameworkService {
 
 	Framework findById(int id);
 
-	List<Framework> findAll();
+	List<Framework> findAll(String search);
 
 	List<Framework> findFramework(int from, int to, String search);
 }

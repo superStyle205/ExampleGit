@@ -2,6 +2,8 @@ package fasttrackse.ftjd1801.fbms.controller.projectmanage;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,12 @@ public class FrameworkController {
 	@Autowired
 	FrameworkService frameworkService;
 
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String getSearch(@PathParam(value = "search") String searchName) {
+		search = searchName;
+		return "redirect:/QuanLyDuAn/Framework/list-framework/";
+	}
+
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewFrawork(Model model) {
 		int page = 1;
@@ -29,7 +37,7 @@ public class FrameworkController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Framework> listAll = frameworkService.findAll();
+		List<Framework> listAll = frameworkService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -51,7 +59,7 @@ public class FrameworkController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Framework> listAll = frameworkService.findAll();
+		List<Framework> listAll = frameworkService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -64,7 +72,7 @@ public class FrameworkController {
 		model.addAttribute("noOfPages", nOfPages);
 		model.addAttribute("pageid", page);
 		model.addAttribute("listFramework", listFramework);
-		return "QuanLyDuAn/framework/list";	
+		return "QuanLyDuAn/framework/list";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -78,8 +86,8 @@ public class FrameworkController {
 	public String doAdd(Model model, @ModelAttribute("framework") Framework fw,
 			final RedirectAttributes redirectAttributes) {
 		try {
-		frameworkService.addNew(fw);
-		redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công");
+			frameworkService.addNew(fw);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Thử lại");
 		}
@@ -97,8 +105,8 @@ public class FrameworkController {
 	public String doUpdate(Model model, @ModelAttribute("framework") Framework fw,
 			final RedirectAttributes redirectAttributes) {
 		try {
-		frameworkService.update(fw);
-		redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
+			frameworkService.update(fw);
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("messageError", "Lỗi Xin thử lại!");
 		}
@@ -106,13 +114,15 @@ public class FrameworkController {
 	}
 
 	@RequestMapping(value = "/delete/{maFramework}", method = RequestMethod.GET)
-	public String delete(@PathVariable("maFramework") int maFramework,ModelMap model, final RedirectAttributes redirectAttributes) {
+	public String deleteForm(@PathVariable("maFramework") int maFramework, ModelMap model,
+			final RedirectAttributes redirectAttributes) {
 		model.addAttribute("framework", frameworkService.findById(maFramework));
 		model.addAttribute("delete", true);
 		return "QuanLyDuAn/framework/form";
 	}
-	@RequestMapping(value = "/delete/{maFramework}",method = RequestMethod.POST)
-	public String doDelete(@PathVariable("maFramework") int maFramework,final RedirectAttributes redirectAttributes ) {
+
+	@RequestMapping(value = "/delete/{maFramework}", method = RequestMethod.POST)
+	public String doDelete(@PathVariable("maFramework") int maFramework, final RedirectAttributes redirectAttributes) {
 		try {
 			frameworkService.delete(maFramework);
 			redirectAttributes.addFlashAttribute("messageSuccess", "Xóa thành công");

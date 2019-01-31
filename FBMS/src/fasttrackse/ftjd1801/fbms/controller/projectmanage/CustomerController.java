@@ -2,7 +2,10 @@ package fasttrackse.ftjd1801.fbms.controller.projectmanage;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fasttrackse.ftjd1801.fbms.service.projectmanage.CustomerService;
+import fasttrackse.ftjd1801.fbms.dao.security.UserAccountDaoImpl;
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Customer;
+import fasttrackse.ftjd1801.fbms.entity.registrationleave.RegistrationLeave;
+import fasttrackse.ftjd1801.fbms.entity.security.UserAccount;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.CustomerService;
 
 @Controller
 @RequestMapping("/QuanLyDuAn/KhachHang/list-khachHang")
@@ -23,6 +29,12 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
+	@RequestMapping(value = { "search" }, method = RequestMethod.GET)
+	public String getSearch(@PathParam(value = "searchName") String searchName) {
+		search = searchName;
+		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang/";
+	}
+
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewCustomer(Model model) {
 		int page = 1;
@@ -30,7 +42,7 @@ public class CustomerController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Customer> listAll = customerService.findAll();
+		List<Customer> listAll = customerService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -52,7 +64,7 @@ public class CustomerController {
 		int recordsPerPage = 3;
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
-		List<Customer> listAll = customerService.findAll();
+		List<Customer> listAll = customerService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}

@@ -53,8 +53,10 @@ public class DatabaseDaoImpl extends AbstractDao<Integer, Database> implements D
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Database> findAll() {
+	public List<Database> findAll(String search) {
 		Criteria criteria = createEntityCriteria();
+		Criterion cond = Restrictions.ilike("nameDatabase", "%" + search + "%");
+		criteria.add(cond);
 		return (List<Database>) criteria.list();
 	}
 

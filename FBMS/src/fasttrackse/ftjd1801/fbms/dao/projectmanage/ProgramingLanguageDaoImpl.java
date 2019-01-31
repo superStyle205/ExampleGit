@@ -53,8 +53,10 @@ public class ProgramingLanguageDaoImpl extends AbstractDao<Integer, ProgramingLa
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProgramingLanguage> findAll() {
+	public List<ProgramingLanguage> findAll(String search) {
 		Criteria criteria = createEntityCriteria();
+		Criterion cond = Restrictions.ilike("nameLanguage", "%" + search +"%");
+		criteria.add(cond);
 		return (List<ProgramingLanguage>) criteria.list();
 	}
 
@@ -62,9 +64,9 @@ public class ProgramingLanguageDaoImpl extends AbstractDao<Integer, ProgramingLa
 	@Override
 	public List<ProgramingLanguage> findProgramingLanguage(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("name_language", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("nameLanguage", "%" + search + "%");
 		criteria.add(cond);
-		return (List<ProgramingLanguage>) criteria.list();
+		return (List<ProgramingLanguage>) criteria.list().subList(fromIndex, toIndex);
 	}
 
 }

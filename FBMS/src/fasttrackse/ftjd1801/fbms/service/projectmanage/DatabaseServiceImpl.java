@@ -35,8 +35,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 	}
 
 	@Override
-	public List<Database> findAll() {
-		return dao.findAll();
+	public List<Database> findAll(String search) {
+		return dao.findAll(search);
 	}
 
 	@Override

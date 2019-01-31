@@ -25,7 +25,6 @@ public class DatabaseProjectId implements java.io.Serializable {
 	}
 
 	@Column(name = "id_project")
-	@NotNull
 	public Integer getIdProject() {
 		return this.idProject;
 	}
@@ -35,7 +34,6 @@ public class DatabaseProjectId implements java.io.Serializable {
 	}
 
 	@Column(name = "id_database")
-	@NotNull
 	public Integer getIdDatabase() {
 		return this.idDatabase;
 	}

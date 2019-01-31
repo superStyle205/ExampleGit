@@ -57,6 +57,13 @@
 								href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item active">Danh sách database</li>
 						</ol>
+						<form action="/FBMS/QuanLyDuAn/Database/list-database/search"
+							method="GET">
+							<input type="text" name="searchName" placeholder="Search...">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -126,8 +133,10 @@
 													<td>${database.idDatabase }</td>
 													<td>${database.nameDatabase }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/Database/list-database/edit/${database.idDatabase}' />"><i class='fa fa-pencil'></i></a>
-															<a href="<c:url value='/QuanLyDuAn/Database/list-database/delete/${database.idDatabase}' />"><i class='fa fa-trash'></i></a></td>
+														href="<c:url value='/QuanLyDuAn/Database/list-database/edit/${database.idDatabase}' />"><i
+															class='fa fa-pencil'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/Database/list-database/delete/${database.idDatabase}' />"><i
+															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"

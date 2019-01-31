@@ -2,6 +2,8 @@ package fasttrackse.ftjd1801.fbms.controller.projectmanage;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,12 @@ public class DomainController {
 	@Autowired
 	private DomainService domainService;
 
+	@RequestMapping(value = { "search" }, method = RequestMethod.GET)
+	public String getSearch(@PathParam(value = "searchName") String searchName) {
+		search = searchName;
+		return "redirect:/QuanLyDuAn/Domain/list-domain/";
+	}
+
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewDomain(Model model) {
 		int page = 1;
@@ -30,7 +38,7 @@ public class DomainController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Domain> listAll = domainService.findAll();
+		List<Domain> listAll = domainService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -52,7 +60,7 @@ public class DomainController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Domain> listAll = domainService.findAll();
+		List<Domain> listAll = domainService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}

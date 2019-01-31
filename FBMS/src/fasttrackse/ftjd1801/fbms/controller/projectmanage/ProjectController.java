@@ -31,7 +31,8 @@ public class ProjectController {
 	ProgramingLanguageService languageService;
 	@Autowired
 	DomainService domainService;
-	
+	String search = "";
+
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewProject(Model model) {
 		List<Project> list = projectService.listAll();
@@ -48,10 +49,10 @@ public class ProjectController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addForm(Model model) {
 		model.addAttribute("project", new Project());
-		model.addAttribute("listDomain", domainService.findAll());
-		model.addAttribute("database", databaseService.findAll());
-		model.addAttribute("framework", frameworkService.findAll());
-		model.addAttribute("Language", languageService.findAll());
+		model.addAttribute("listDomain", domainService.findAll(search));
+		model.addAttribute("database", databaseService.findAll(search));
+		model.addAttribute("framework", frameworkService.findAll(search));
+		model.addAttribute("Language", languageService.findAll(search));
 		return "QuanLyDuAn/duan/add_form";
 	}
 

@@ -17,7 +17,17 @@
 							<li class="breadcrumb-item"><a
 								href='<c:url value="/QuanLyDuAn/NgonNgu/list-ngonNgu" />'>Danh
 									sách ngôn ngữ</a></li>
-							<li class="breadcrumb-item active">Thêm mới ngôn ngữ</li>
+							<c:choose>
+								<c:when test="${edit}">
+									<li class="breadcrumb-item active">Sửa thông tin</li>
+								</c:when>
+								<c:when test="${delete}">
+									<li class="breadcrumb-item active">Xóa ngôn ngữ</li>
+								</c:when>
+								<c:otherwise>
+									<li class="breadcrumb-item active">Thêm ngôn ngữ mới</li>
+								</c:otherwise>
+							</c:choose>
 						</ol>
 					</div>
 				</div>
@@ -40,8 +50,26 @@
 								placeholder="Tên ngôn ngữ" />
 						</div>
 						<div class="col-sm-12 text-center">
-							<button type="submit" class="btn btn-success">Lưu thông
-								tin</button>
+							<c:choose>
+								<c:when test="${edit}">
+									<button type="submit" class="btn btn-success">Lưu
+										thông tin</button>
+									<a href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/1"
+										class="btn btn-success">Hủy</a>
+								</c:when>
+								<c:when test="${delete}">
+									<button type="submit" class="btn btn-success">Xóa
+										thông tin</button>
+									<a href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/1"
+										class="btn btn-success">Hủy</a>
+								</c:when>
+								<c:otherwise>
+									<button type="submit" class="btn btn-success">Lưu
+										thông tin</button>
+									<a href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/1"
+										class="btn btn-success">Hủy</a>
+								</c:otherwise>
+							</c:choose>
 						</div>
 					</form:form>
 				</div>

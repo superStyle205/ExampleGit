@@ -30,7 +30,6 @@ public class Domain implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id_domain", unique = true, nullable = false)
-	@NotNull
 	public Integer getIdDomain() {
 		return this.idDomain;
 	}

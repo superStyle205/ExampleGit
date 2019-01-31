@@ -54,6 +54,11 @@
 							<form:input class="form-control" path="nameDatabase"
 								placeholder="Tên database" />
 						</div>
+							<div class="form-group col-sm-6">
+							<label>Mô tả</label>
+							<form:textarea class="form-control" path="note"
+								placeholder="Tên database" />
+						</div>
 						<div class="col-sm-12 text-center">
 							<c:choose>
 								<c:when test="${edit}">

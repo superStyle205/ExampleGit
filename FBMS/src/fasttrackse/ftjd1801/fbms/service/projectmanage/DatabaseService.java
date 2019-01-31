@@ -13,7 +13,7 @@ public interface DatabaseService {
 
 	Database findById(int id);
 
-	List<Database> findAll();
+	List<Database> findAll(String search);
 
 	List<Database> findDatabase(int from, int to, String search);
 }

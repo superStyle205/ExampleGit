@@ -5,7 +5,7 @@ import java.util.List;
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Domain;
 
 public interface DomainDao {
-	public List<Domain> findAll();
+	public List<Domain> findAll(String search);
 
 	public void addNew(Domain dm);
 

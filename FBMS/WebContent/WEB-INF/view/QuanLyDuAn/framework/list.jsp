@@ -57,6 +57,12 @@
 								href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item active">Danh sách framework</li>
 						</ol>
+						<form action="/FBMS/QuanLyDuAn/Framework/list-framework/search" method="GET">
+							<input type="text" name="searchName" placeholder="Search...">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>

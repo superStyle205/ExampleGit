@@ -2,6 +2,8 @@ package fasttrackse.ftjd1801.fbms.controller.projectmanage;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,12 @@ public class DatabaseController {
 	@Autowired
 	private DatabaseService databaseService;
 
+	@RequestMapping(value = "search", method = RequestMethod.GET)
+	public String getSearch(@PathParam("search") String searchName) {
+		search = searchName;
+		return "redirect:/QuanLyDuAn/Database/list-database/";
+	}
+
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewDatabase(Model model) {
 		int page = 1;
@@ -29,7 +37,7 @@ public class DatabaseController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Database> listAll = databaseService.findAll();
+		List<Database> listAll = databaseService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -51,7 +59,7 @@ public class DatabaseController {
 		int recordStart = (page - 1) * recordsPerPage;
 		int recordEnd = recordStart + recordsPerPage;
 		int nOfPages;
-		List<Database> listAll = databaseService.findAll();
+		List<Database> listAll = databaseService.findAll(search);
 		if (listAll.size() < recordEnd) {
 			recordEnd = listAll.size();
 		}
@@ -60,7 +68,8 @@ public class DatabaseController {
 			nOfPages = 1;
 		} else {
 			nOfPages = (int) Math.ceil((double) listAll.size() / recordsPerPage);
-		}		model.addAttribute("noOfPages", nOfPages);
+		}
+		model.addAttribute("noOfPages", nOfPages);
 		model.addAttribute("pageid", page);
 		model.addAttribute("listDatabase", listDatabase);
 		return "QuanLyDuAn/database/list";
@@ -77,12 +86,8 @@ public class DatabaseController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String doAdd(Model model, @ModelAttribute("database") Database db,
 			final RedirectAttributes redirectAttributes) {
-		try {
-			databaseService.addNew(db);
-			redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công");
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Thử lại");
-		}
+		databaseService.addNew(db);
+
 		return "redirect:/QuanLyDuAn/Database/list-database";
 	}
 
