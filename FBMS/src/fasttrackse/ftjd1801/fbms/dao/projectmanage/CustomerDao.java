@@ -14,7 +14,7 @@ public interface CustomerDao {
 
 	Customer findByIdCustomer(int id);
 
-	List<Customer> findAll();
+	List<Customer> findAll(String search);
 
 	List<Customer> findCustomer(int fromIndex, int toIndex, String search);
 

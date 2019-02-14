@@ -117,7 +117,7 @@
 											<tr>
 												<th>Mã ngôn ngữ</th>
 												<th>Tên ngôn ngữ</th>
-												
+
 												<th></th>
 												<th></th>
 											</tr>
@@ -161,6 +161,75 @@
 											</div>
 										</tbody>
 									</table>
+									<ul class="pagination" style="margin-left: 65%;">
+										<c:if test="${pageid != 1}">
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/1">Fisrt
+													page</a></li>
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid -1 }">Previous
+													page</a></li>
+										</c:if>
+										<c:choose>
+											<c:when test="${noOfPages eq 1}">
+												<li class="page-item active"><a class="page-link"
+													href="#">1</a></li>
+											</c:when>
+											<c:when test="${noOfPages eq 2}">
+												<c:choose>
+													<c:when test="${pageid eq 1}">
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid}">1</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid+1}">2</a></li>
+													</c:when>
+													<c:when test="${pageid eq 2}">
+														<li class="page-item "><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid-1}">1</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid} ">2</a></li>
+													</c:when>
+												</c:choose>
+
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${pageid eq 1}">
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid} ">${pageid}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid+1} ">${pageid+1}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid+2} ">${pageid+2}</a>
+													</c:when>
+													<c:when test="${pageid eq noOfPages}">
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid-2} ">${pageid-2}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid-1} ">${pageid-1}</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid} ">${pageid}</a>
+													</c:when>
+													<c:otherwise>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid-1} ">${pageid-1}</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid} ">${pageid}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid+1} ">${pageid+1}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+										</c:choose>
+										<c:if test="${pageid lt noOfPages}">
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${pageid+1}">Next
+													page</a></li>
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/KhachHang/list-khachHang/${noOfPages} ">Last
+													page</a></li>
+										</c:if>
+									</ul>
 								</div>
 							</div>
 						</div>

@@ -57,13 +57,20 @@
 								href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item active">Danh sách framework</li>
 						</ol>
+						<form action="/FBMS/QuanLyDuAn/Framework/list-framework/search" method="GET">
+							<input type="text" name="searchName" placeholder="Search...">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a href="<c:url value = "/QuanLyDuAn/Framework/list-framework/add"/>"
+					<a
+						href="<c:url value = "/QuanLyDuAn/Framework/list-framework/add"/>"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -119,7 +126,6 @@
 												<th>Tên framework</th>
 												<th>Mô tả</th>
 												<th></th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -129,9 +135,10 @@
 													<td>${framework.technology }</td>
 													<td>${framework.describes }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/Framework/list-framework/edit/${framework.idFramework}' />">edit</a></td>
-													<td><a
-														href="<c:url value='/QuanLyDuAn/Framework/list-framework/delete/${framework.idFramework}' />">delete</a></td>
+														href="<c:url value='/QuanLyDuAn/Framework/list-framework/edit/${framework.idFramework}' />"><i
+															class='fa fa-pencil'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/Framework/list-framework/delete/${framework.idFramework}' />"><i
+															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"
@@ -162,6 +169,75 @@
 											</div>
 										</tbody>
 									</table>
+									<ul class="pagination" style="margin-left: 65%;">
+										<c:if test="${pageid != 1}">
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/Framework/list-framework/1">Fisrt
+													page</a></li>
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid -1 }">Previous
+													page</a></li>
+										</c:if>
+										<c:choose>
+											<c:when test="${noOfPages eq 1}">
+												<li class="page-item active"><a class="page-link"
+													href="#">1</a></li>
+											</c:when>
+											<c:when test="${noOfPages eq 2}">
+												<c:choose>
+													<c:when test="${pageid eq 1}">
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid}">1</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid+1}">2</a></li>
+													</c:when>
+													<c:when test="${pageid eq 2}">
+														<li class="page-item "><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid-1}">1</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid} ">2</a></li>
+													</c:when>
+												</c:choose>
+
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${pageid eq 1}">
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid} ">${pageid}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid+1} ">${pageid+1}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid+2} ">${pageid+2}</a>
+													</c:when>
+													<c:when test="${pageid eq noOfPages}">
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid-2} ">${pageid-2}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid-1} ">${pageid-1}</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid} ">${pageid}</a>
+													</c:when>
+													<c:otherwise>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid-1} ">${pageid-1}</a></li>
+														<li class="page-item active"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid} ">${pageid}</a></li>
+														<li class="page-item"><a class="page-link"
+															href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid+1} ">${pageid+1}</a></li>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+										</c:choose>
+										<c:if test="${pageid lt noOfPages}">
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/Framework/list-framework/${pageid+1}">Next
+													page</a></li>
+											<li class="page-item"><a class="page-link"
+												href="/FBMS/QuanLyDuAn/Framework/list-framework/${noOfPages} ">Last
+													page</a></li>
+										</c:if>
+									</ul>
 								</div>
 							</div>
 						</div>

@@ -35,8 +35,8 @@ public class ProgramingLanguageServiceImpl implements ProgramingLanguageService 
 	}
 
 	@Override
-	public List<ProgramingLanguage> findAll() {
-		return dao.findAll();
+	public List<ProgramingLanguage> findAll(String search) {
+		return dao.findAll(search);
 	}
 
 	@Override

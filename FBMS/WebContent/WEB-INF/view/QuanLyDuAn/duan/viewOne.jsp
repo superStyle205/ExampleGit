@@ -40,7 +40,7 @@
 				<div class="row">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Thông tin chức danh</h4>
+							<h4 class="card-title">Thông tin dự án</h4>
 							<a class="heading-elements-toggle"><i
 								class="fa fa-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -57,12 +57,27 @@
 								<div class="table-responsive">
 									<table class="table">
 										<tr>
-											<td><label>Tên chức danh</label> <input
-												class="form-control" value="${chucDanh.tenChucDanh}"
+											<td><label>Mã dự án</label>
+											<input class="form-control" value="${project.idProject}" readonly /></td>
+											<td><label>Tên dự án</label> <input
+												class="form-control" value="${project.tenProject}"
 												placeholder="Tên chức danh" readonly /></td>
-											<td><label>Mã chức danh</label> <input
-												class="form-control" value="${chucDanh.maChucDanh}"
-												placeholder="Mã chức danh" readonly /></td>
+											<td><label>Mã khách hàng</label> <input
+												class="form-control" value="${project.idCustomer}" readonly /></td>
+											<td><label>Mô tả</label>
+											<input class="form-control" value="${project.describes }" readonly /></td>
+											<td><label>Phòng dự án</label>
+											<input class="form-control" value="${project.projectDivision }" readonly /></td>
+											<td><label>Quản lý dự án</label>
+											<input class="form-control" value="${project.projectManager }" readonly /></td>
+											<td><label>Ngày bắt đầu</label>
+											<input class="form-control" value="${project.startDate }" readonly /></td>
+											<td><label>Ngày kết thúc</label>
+											<input class="form-control" value="${project.endDate }" readonly /></td>
+											<td><label>Domain</label>
+											<input class="form-control" value="${project.domain }" readonly /></td>
+											<td><label>Status</label>
+											<input class="form-control" value="${project.status }" readonly /></td>
 										</tr>
 									</table>
 								</div>

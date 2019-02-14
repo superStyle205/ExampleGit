@@ -21,8 +21,10 @@ public class DomainDaoImpl extends AbstractDao<Integer, Domain> implements Domai
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Domain> findAll() {
+	public List<Domain> findAll(String search) {
 		Criteria criteria = createEntityCriteria();
+		Criterion cond = Restrictions.ilike("nameDomain", "%" + search + "%");
+		criteria.add(cond);
 		return (List<Domain>) criteria.list();
 	}
 

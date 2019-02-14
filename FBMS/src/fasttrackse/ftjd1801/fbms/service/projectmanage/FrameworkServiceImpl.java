@@ -34,8 +34,8 @@ public class FrameworkServiceImpl implements FrameworkService {
 	}
 
 	@Override
-	public List<Framework> findAll() {
-		return dao.findAll();
+	public List<Framework> findAll(String search) {
+		return dao.findAll(search);
 	}
 
 	@Override

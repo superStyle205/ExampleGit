@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -43,6 +45,7 @@ public class Customer implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id_customer", unique = true, nullable = false)
+	@NotEmpty
 	public Integer getIdCustomer() {
 		return this.idCustomer;
 	}
@@ -52,6 +55,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Column(name = "name_customer", length = 45)
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	public String getNameCustomer() {
 		return this.nameCustomer;
 	}
@@ -61,6 +66,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Column(name = "contact")
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	public Integer getContact() {
 		return this.contact;
 	}
@@ -70,6 +77,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Column(name = "email", length = 45)
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	public String getEmail() {
 		return this.email;
 	}
@@ -79,6 +88,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Column(name = "sex")
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	public Integer getSex() {
 		return this.sex;
 	}
@@ -88,6 +99,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Column(name = "address", length = 100)
+	@NotEmpty
+	@Size(min = 3, max = 50)
 	public String getAddress() {
 		return this.address;
 	}
@@ -98,6 +111,7 @@ public class Customer implements java.io.Serializable {
 
 	@DateTimeFormat(iso=ISO.DATE)
 	@Column(name = "dayOfBirth", length = 10)
+	@NotEmpty
 	public Date getDayOfBirth() {
 		return this.dayOfBirth;
 	}
