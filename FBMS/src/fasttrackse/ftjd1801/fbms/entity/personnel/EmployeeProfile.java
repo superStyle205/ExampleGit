@@ -21,6 +21,10 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Table(name = "employee_profile", catalog = "project")
 public class EmployeeProfile implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer idEmployee;
 	private String name;
 	private Integer sex;
