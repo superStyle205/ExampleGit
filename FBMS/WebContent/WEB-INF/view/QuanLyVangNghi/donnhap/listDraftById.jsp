@@ -1,7 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="/WEB-INF/view/templates/header.jsp" />
+
 <style>
 .tbl_actions a {
 	color: #333;
@@ -43,6 +47,7 @@
 	content: ""
 }
 </style>
+<body onload="action()">
 <div class="app-content content container-fluid">
 	<div class="content-wrapper">
 
@@ -63,7 +68,7 @@
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a href="<c:url value = "/QuanLyVangNghi/soandonmoi"/>"
+					<a href="<c:url value = "/QuanLyVangNghi/soandonmoi/add/"/>"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -108,6 +113,7 @@
 								</ul>
 							</div>
 						</div>
+				
 						<div class="card-body collapse in">
 							<div class="card-block card-dashboard">
 								<div class="table-responsive">
@@ -124,24 +130,23 @@
 												<th>Trạng thái</th>
 												<th></th>
 											</tr>
-											<c:forEach var="danhsach" items="${listDrafts}">   
-											<tr>
-												<th>${danhsach.idAbsent}</th>
-												<th>${danhsach.idEmployee}</th>
-												<th>${danhsach.day}</th>
-												<th>${danhsach.toDay}</th>
-												<th>${danhsach.typeOfLeave}</th>
-												<th>${danhsach.totalDay}</th>
-												<th>${danhsach.status}</th>
-												<th><a href="edit/${danhsach.idAbsent}">Edit</a><a href="delete/${danhsach.idAbsent}">Delete</th>
-											</tr>											
-  											 </c:forEach>						
-										</thead>
-										
+											<c:forEach var="danhsach" items="${list}">
+												<tr>
+													<th>${danhsach.idAbsent}</th>
+													<th>${danhsach.idEmployee}</th>
+													<th>${danhsach.day}</th>
+													<th>${danhsach.toDay}</th>
+													<th>${danhsach.typeOfLeave}</th>
+													<th>${danhsach.totalDay}</th>
+													<th>${danhsach.status}</th>
+													<th><a href="edit/${danhsach.idAbsent}">Edit</a> <a href="delete/${danhsach.idAbsent}">Delete</a></th>
+												</tr>
+											</c:forEach>
+										</thead>	
 									</table>
 								</div>
 							</div>
-						</div>
+						</div>			
 					</div>
 				</div>
 			</div>
@@ -149,4 +154,5 @@
 	</div>
 </div>
 
+</body>
 <jsp:include page="/WEB-INF/view/templates/footer.jsp" />

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/WEB-INF/view/templates/header.jsp" />
 <style>
@@ -49,13 +50,13 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-9 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Danh sách vang nghi</h3>
+				<h3 class="content-header-title mb-0">Danh sách chờ duyệt</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
 								href='<c:url value="/home" />'>Home</a></li>
-							<li class="breadcrumb-item active">Danh sách chức danh</li>
+							<li class="breadcrumb-item active">Danh sách chờ duyệt</li>
 						</ol>
 					</div>
 				</div>
@@ -63,7 +64,7 @@
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a href="<c:url value = "/QuanLyVangNghi/soandonmoi"/>"
+					<a href="<c:url value = "/QuanLyVangNghi/soandonmoi/add"/>"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -92,13 +93,18 @@
 			</c:if>
 			<!-- End Show message -->
 
+			<form:form action="search" method="POST">
+
+			Tìm kiếm <input  type ="text" name="search" pattern="[0-9]" required  />
+ 			<input type="submit" value="Tim" />
+			</form:form>
+
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Danh sách vang nghĩ</h4>
-							<a class="heading-elements-toggle"><i
-								class="fa fa-ellipsis-v font-medium-3"></i></a>
+							<h4 class="card-title">Danh sách chờ duyệt</h4>
+
 							<div class="heading-elements">
 								<ul class="list-inline mb-0">
 									<li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -108,8 +114,10 @@
 								</ul>
 							</div>
 						</div>
+
 						<div class="card-body collapse in">
 							<div class="card-block card-dashboard">
+
 								<div class="table-responsive">
 									<table id="datatable"
 										class="table table-striped table-bordered dataex-res-constructor">
@@ -122,54 +130,57 @@
 												<th>Lý do</th>
 												<th>Tổng ngày nghĩ</th>
 												<th>Trạng thái</th>
+												<th></th>
 											</tr>
-											<c:forEach var="danhsach" items="${list}">   
-											<tr>
-												<th>${danhsach.idAbsent}</th>
-												<th>${danhsach.idEmployee}</th>
-												<th>${danhsach.day}</th>
-												<th>${danhsach.toDay}</th>
-												<th>${danhsach.typeOfLeave}</th>
-												<th>${danhsach.totalDay}</th>
-												<th>${danhsach.status}</th>
-											</tr>											
-  											 </c:forEach>						
+											<c:forEach var="danhsach" items="${listPendingPage}">
+												<tr>
+													<th>${danhsach.idAbsent}</th>
+													<th>${danhsach.idEmployee}</th>
+													<th>${danhsach.day}</th>
+													<th>${danhsach.toDay}</th>
+													<th>${danhsach.typeOfLeave}</th>
+													<th>${danhsach.totalDay}</th>
+													<th>${danhsach.status}</th>
+													<th><a href="edit/${danhsach.idAbsent}">Xử lý</a> </th>
+												</tr>
+											</c:forEach>
 										</thead>
-										<tbody>
-											<div class="modal fade" id="confirm-delete" tabindex="-1"
-												role="dialog" aria-labelledby="myModalLabel"
-												aria-hidden="true">
-												<div class="modal-dialog">
-													<div class="modal-content">
-
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal"
-																aria-hidden="true">&times;</button>
-															<h4 class="modal-title" id="myModalLabel">Bạn có
-																chắc muốn xóa</h4>
-														</div>
-
-														<div class="modal-body">
-															<p>Bạn có chắc muốn xóa</p>
-															<p class="debug-url"></p>
-														</div>
-
-														<div class="modal-footer">
-															<button type="button" class="btn btn-default"
-																data-dismiss="modal">Quay lại</button>
-															<a class="btn btn-danger btn-ok">Xóa</a>
-														</div>
-													</div>
-												</div>
-											</div>
-										</tbody>
 									</table>
 								</div>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
+			Page :
+			<c:choose>
+				<c:when test="${totalPage==1}">
+					<a href="1"> 1 </a>
+				</c:when>
+				<c:when test="${currentPage==1}">
+					<a href="1"> 1 </a>
+					<a href="${currentPage + 1}"> ${currentPage + 1} </a>
+					<a href="${currentPage + 1}"> &rsaquo; </a>
+					<a href="${totalPage}"> &rsaquo;&rsaquo; </a>
+				</c:when>
+				<c:when test="${currentPage==totalPage}">
+					<a href="1">&lsaquo;&lsaquo; </a>
+					<a href="${currentPage - 1}"> &lsaquo; </a>
+					<a href="${currentPage - 1}"> ${currentPage - 1}</a>
+					<a href="${totalPage}"> ${totalPage}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="1"> &lsaquo;&lsaquo;</a>
+					<a href="${currentPage - 1}"> &lsaquo;</a>
+					<a href="${currentPage - 1}"> ${currentPage - 1}</a>
+					<a href="${currentPage}"> ${currentPage}</a>
+					<a href="${currentPage + 1}"> ${currentPage + 1}</a>
+					<a href="${currentPage + 1}"> &rsaquo;</a>
+					<a href="${totalPage}"> &rsaquo;&rsaquo; </a>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</div>
 </div>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-dsadasdsadsadsa
+<a href="/FBMS/QuanLyVangNghi/danhsachduyet/1">Come back</a>
 </body>
 </html>
