@@ -381,7 +381,7 @@
 							href="<c:url value="/QuanLyThoiGian/pheDuyet/danhsachchopheduyet"/>"
 							class="menu-item">Danh Sách Chờ Phê Duyệt</a></li>
 						<li><a
-							href="<c:url value="/QuanLyThoiGian/pheDuyet/danhsachpheduyet"/>"
+							href="<c:url value="/QuanLyThoiGian/pheDuyet/"/>"
 							class="menu-item">Danh Sách Đã Phê Duyệt</a></li>
 
 					</ul></li>
