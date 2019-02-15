@@ -61,7 +61,7 @@ public class ProjectDaoImpl extends AbstractDao<Integer, Project> implements Pro
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Project> findProject(int fromIndex, int toIndex, String search) {
+	public List<Project> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("name_language", "%" + search + "%");
 		criteria.add(cond);

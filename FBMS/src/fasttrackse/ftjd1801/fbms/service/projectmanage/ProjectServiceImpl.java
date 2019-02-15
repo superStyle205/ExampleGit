@@ -40,7 +40,7 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public List<Project> findProject(int fromIndex, int toIndex, String search) {
-		return dao.findProject(fromIndex, toIndex, search);
+		return dao.listForPagination(fromIndex, toIndex, search);
 	}
 
 }

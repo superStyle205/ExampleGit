@@ -5,7 +5,7 @@ import java.util.List;
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Domain;
 
 public interface DomainDao {
-	public List<Domain> findAll(String search);
+	public List<Domain> listAll(String search);
 
 	public void addNew(Domain dm);
 
@@ -15,6 +15,6 @@ public interface DomainDao {
 
 	public Domain findByMaDomain(int maDomain);
 
-	public List<Domain> findAll(int iDisplayStart, int iDisplayLength, String search);
+	public List<Domain> listForPagination(int iDisplayStart, int iDisplayLength, String search);
 
 }

@@ -15,7 +15,7 @@ public class DomainServiceImpl implements DomainService {
 
 	@Override
 	public List<Domain> findAll(String search) {
-		return domainDao.findAll(search);
+		return domainDao.listAll(search);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class DomainServiceImpl implements DomainService {
 
 	@Override
 	public List<Domain> findAll(int fromIndex, int toIndex, String search) {
-		return domainDao.findAll(fromIndex, toIndex, search);
+		return domainDao.listForPagination(fromIndex, toIndex, search);
 	}
 
 

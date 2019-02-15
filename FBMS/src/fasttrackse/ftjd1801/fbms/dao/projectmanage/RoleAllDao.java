@@ -13,8 +13,8 @@ public interface RoleAllDao {
 
 	void delete(int id);
 
-	List<RoleAll> findAll();
+	List<RoleAll> listAll();
 
-	List<RoleAll> findRole(int fromIndex, int toIndex, String search);
+	List<RoleAll> listForPagination(int fromIndex, int toIndex, String search);
 
 }

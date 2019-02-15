@@ -36,12 +36,12 @@ public class ProgramingLanguageServiceImpl implements ProgramingLanguageService 
 
 	@Override
 	public List<ProgramingLanguage> findAll(String search) {
-		return dao.findAll(search);
+		return dao.listAll(search);
 	}
 
 	@Override
 	public List<ProgramingLanguage> findProgramingLanguage(int fromIndex, int toIndex, String search) {
-		return dao.findProgramingLanguage(fromIndex, toIndex, search);
+		return dao.listForPagination(fromIndex, toIndex, search);
 	}
 	
 }

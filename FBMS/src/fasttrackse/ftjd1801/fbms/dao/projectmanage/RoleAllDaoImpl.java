@@ -53,14 +53,14 @@ public class RoleAllDaoImpl extends AbstractDao<Integer, RoleAll> implements Rol
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RoleAll> findAll() {
+	public List<RoleAll> listAll() {
 		Criteria criteria = createEntityCriteria();
 		return (List<RoleAll>) criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RoleAll> findRole(int fromIndex, int toIndex, String search) {
+	public List<RoleAll> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("role", "%" + search + "%");
 		criteria.add(cond);

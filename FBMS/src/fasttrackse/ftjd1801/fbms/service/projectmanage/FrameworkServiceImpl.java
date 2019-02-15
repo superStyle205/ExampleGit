@@ -35,12 +35,12 @@ public class FrameworkServiceImpl implements FrameworkService {
 
 	@Override
 	public List<Framework> findAll(String search) {
-		return dao.findAll(search);
+		return dao.listAll(search);
 	}
 
 	@Override
 	public List<Framework> findFramework(int from, int to, String search) {
-		return dao.findFramework(from, to, search);
+		return dao.listForPagination(from, to, search);
 	}
 
 }

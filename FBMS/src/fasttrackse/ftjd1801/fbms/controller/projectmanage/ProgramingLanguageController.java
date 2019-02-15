@@ -28,7 +28,7 @@ public class ProgramingLanguageController {
 	@RequestMapping(value = "search",method = RequestMethod.GET)
 	public String getSearch (@PathParam("search") String searchName) {
 		search = searchName;
-		return "redirect:/QuanLyDuAn/NgonNgu/list=ngonNgu";
+		return "redirect:/QuanLyDuAn/NgonNgu/list-ngonNgu";
 	}
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
 	public String viewLanguage(Model model) {

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Project;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.CustomerService;
 import fasttrackse.ftjd1801.fbms.service.projectmanage.DatabaseService;
 import fasttrackse.ftjd1801.fbms.service.projectmanage.DomainService;
 import fasttrackse.ftjd1801.fbms.service.projectmanage.FrameworkService;
@@ -31,6 +32,9 @@ public class ProjectController {
 	ProgramingLanguageService languageService;
 	@Autowired
 	DomainService domainService;
+	@Autowired
+	CustomerService customerService;
+	
 	String search = "";
 
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
@@ -50,9 +54,10 @@ public class ProjectController {
 	public String addForm(Model model) {
 		model.addAttribute("project", new Project());
 		model.addAttribute("listDomain", domainService.findAll(search));
-		model.addAttribute("database", databaseService.findAll(search));
-		model.addAttribute("framework", frameworkService.findAll(search));
-		model.addAttribute("Language", languageService.findAll(search));
+		model.addAttribute("listDatabase", databaseService.findAll(search));
+		model.addAttribute("listFramework", frameworkService.findAll(search));
+		model.addAttribute("listLanguage", languageService.findAll(search));
+		model.addAttribute("listCustomer",customerService.findAll(search));
 		return "QuanLyDuAn/duan/add_form";
 	}
 

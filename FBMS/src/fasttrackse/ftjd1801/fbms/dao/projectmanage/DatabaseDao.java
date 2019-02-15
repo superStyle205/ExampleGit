@@ -14,7 +14,7 @@ public interface DatabaseDao {
 	
 	void delete(int id);
 
-	List<Database> findAll(String search);
+	List<Database> listAll(String search);
 
-	List<Database> findDatabase(int fromIndex, int toIndex, String search);
+	List<Database> listForPagination(int fromIndex, int toIndex, String search);
 }

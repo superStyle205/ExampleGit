@@ -57,6 +57,13 @@
 								href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item active">Danh sách ngôn ngữ</li>
 						</ol>
+						<form action="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/search"
+							method="GET">
+							<input type="text" name="searchName" placeholder="Search...">
+							<button class="btn btn-default" type="submit">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -117,8 +124,6 @@
 											<tr>
 												<th>Mã ngôn ngữ</th>
 												<th>Tên ngôn ngữ</th>
-
-												<th></th>
 												<th></th>
 											</tr>
 										</thead>
@@ -128,9 +133,10 @@
 													<td>${language.idLanguage }</td>
 													<td>${language.nameLanguage }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/edit/${language.idLanguage}' />">edit</a></td>
-													<td><a
-														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/delete/${language.idLanguage}' />">delete</a></td>
+														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/edit/${language.idLanguage}' />"><i
+															class='fa fa-pencil'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/delete/${language.idLanguage}' />"><i
+															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"

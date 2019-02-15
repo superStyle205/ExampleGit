@@ -15,6 +15,6 @@ public interface ProjectDao {
 
 	List<Project> listAll();
 
-	List<Project> findProject(int fromIndex, int toIndex, String search);
+	List<Project> listForPagination(int fromIndex, int toIndex, String search);
 
 }

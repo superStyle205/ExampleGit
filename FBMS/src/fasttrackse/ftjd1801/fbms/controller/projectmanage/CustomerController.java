@@ -5,7 +5,6 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,16 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fasttrackse.ftjd1801.fbms.dao.security.UserAccountDaoImpl;
 import fasttrackse.ftjd1801.fbms.entity.projectmanage.Customer;
-import fasttrackse.ftjd1801.fbms.entity.registrationleave.RegistrationLeave;
-import fasttrackse.ftjd1801.fbms.entity.security.UserAccount;
 import fasttrackse.ftjd1801.fbms.service.projectmanage.CustomerService;
 
 @Controller
 @RequestMapping("/QuanLyDuAn/KhachHang/list-khachHang")
 public class CustomerController {
-
+	
 	String search = "";
 	@Autowired
 	private CustomerService customerService;

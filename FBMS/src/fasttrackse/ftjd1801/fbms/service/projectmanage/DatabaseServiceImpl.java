@@ -36,12 +36,12 @@ public class DatabaseServiceImpl implements DatabaseService {
 
 	@Override
 	public List<Database> findAll(String search) {
-		return dao.findAll(search);
+		return dao.listAll(search);
 	}
 
 	@Override
 	public List<Database> findDatabase(int from, int to, String search) {
-		return dao.findDatabase(from, to, search);
+		return dao.listForPagination(from, to, search);
 	}
 
 }

@@ -53,7 +53,7 @@ public class FrameworkDaoImpl extends AbstractDao<Integer,Framework> implements 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Framework> findAll(String search) {
+	public List<Framework> listAll(String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("technology", "%" + search + "%");
 		criteria.add(cond);
@@ -62,7 +62,7 @@ public class FrameworkDaoImpl extends AbstractDao<Integer,Framework> implements 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Framework> findFramework(int fromIndex, int toIndex, String search) {
+	public List<Framework> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("technology", "%" + search + "%");
 		criteria.add(cond);

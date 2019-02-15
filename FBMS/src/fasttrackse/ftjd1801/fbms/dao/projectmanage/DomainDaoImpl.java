@@ -21,7 +21,7 @@ public class DomainDaoImpl extends AbstractDao<Integer, Domain> implements Domai
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Domain> findAll(String search) {
+	public List<Domain> listAll(String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("nameDomain", "%" + search + "%");
 		criteria.add(cond);
@@ -62,7 +62,7 @@ public class DomainDaoImpl extends AbstractDao<Integer, Domain> implements Domai
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Domain> findAll(int fromIndex, int toIndex, String search) {
+	public List<Domain> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("nameDomain", "%" + search + "%");
 		criteria.add(cond);

@@ -13,7 +13,7 @@ public interface ProgramingLanguageDao {
 
 	void delete(int id);
 
-	List<ProgramingLanguage> findAll(String search);
+	List<ProgramingLanguage> listAll(String search);
 
-	List<ProgramingLanguage> findProgramingLanguage(int fromIndex, int toIndex, String search);
+	List<ProgramingLanguage> listForPagination(int fromIndex, int toIndex, String search);
 }

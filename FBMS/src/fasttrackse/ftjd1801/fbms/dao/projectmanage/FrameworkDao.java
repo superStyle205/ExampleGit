@@ -13,8 +13,8 @@ public interface FrameworkDao {
 	
 	void delete(int id);
 
-	List<Framework> findAll(String search);
+	List<Framework> listAll(String search);
 
-	List<Framework> findFramework(int fromIndex, int toIndex, String search);
+	List<Framework> listForPagination(int fromIndex, int toIndex, String search);
 
 }

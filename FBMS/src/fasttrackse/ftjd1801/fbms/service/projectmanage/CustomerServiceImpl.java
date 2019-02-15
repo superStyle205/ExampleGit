@@ -30,12 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> findAll(String search) {
-		return dao.findAll(search);
+		return dao.listAll();
 	}
 
 	@Override
 	public List<Customer> findCustomer(int fromIndex, int toIndex, String search) {
-		return dao.findCustomer(fromIndex, toIndex, search);
+		return dao.listForPagination(fromIndex, toIndex, search);
 	}
 
 	@Override

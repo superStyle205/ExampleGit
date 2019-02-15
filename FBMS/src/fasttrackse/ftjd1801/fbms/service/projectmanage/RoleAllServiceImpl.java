@@ -35,12 +35,12 @@ public class RoleAllServiceImpl implements RoleAllService {
 
 	@Override
 	public List<RoleAll> findAll() {
-		return dao.findAll();
+		return dao.listAll();
 	}
 
 	@Override
 	public List<RoleAll> findRole(int fromIndex, int toIndex, String search) {
-		return dao.findRole(fromIndex, toIndex, search);
+		return dao.listForPagination(fromIndex, toIndex, search);
 	}
 
 }

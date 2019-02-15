@@ -26,11 +26,8 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> findAll(String search) {
+	public List<Customer> listAll() {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("nameCustomer", "%" + search + "%");
-		criteria.add(cond);
-		close();
 		return (List<Customer>) criteria.list();
 	}
 
@@ -54,7 +51,7 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> findCustomer(int fromIndex, int toIndex, String search) {
+	public List<Customer> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
 		Criterion cond = Restrictions.ilike("nameCustomer", "%" + search + "%");
 		criteria.add(cond);

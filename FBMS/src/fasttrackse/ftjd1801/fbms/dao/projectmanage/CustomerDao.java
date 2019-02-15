@@ -14,8 +14,8 @@ public interface CustomerDao {
 
 	Customer findByIdCustomer(int id);
 
-	List<Customer> findAll(String search);
+	List<Customer> listAll();
 
-	List<Customer> findCustomer(int fromIndex, int toIndex, String search);
+	List<Customer> listForPagination(int fromIndex, int toIndex, String search);
 
 }
