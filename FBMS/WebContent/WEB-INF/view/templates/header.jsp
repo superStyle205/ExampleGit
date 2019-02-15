@@ -403,36 +403,33 @@
 						class="fa fa-users"></i><span class="menu-title">Quản lý
 							vắng nghỉ</span></a>
 					<ul class="menu-content" style="">
-						<li class="is-shown"><a class="menu-item"
-							href="<c:url value="/QuanLyVangNghi/soandonmoi"/>"
+						<li class="is-shown"><a class="menu-item" href="#"> Soạn Đơn Mới</a>
+							<ul class="menu-content">
+								<li><a href="<c:url value="/QuanLyVangNghi/soandon/soandonmoi/add/"/>"
 							class="menu-item"> Soạn Đơn Mới</a></li>
+								<li><a href="<c:url value="/QuanLyVangNghi/soandon/donnhap/1"/>"
+							class="menu-item"> Đơn Nháp</a></li>
+								<li><a href="<c:url value="/QuanLyVangNghi/soandon/danhsachdon/1"/>"
+									class="menu-item">Chờ Duyệt/Đã Duyệt/Từ Chối</a></li>
+							</ul></li>
 						<li class="has-sub is-shown"><a class="menu-item" href="#">Thống
 								kê tình hình</a>
 							<ul class="menu-content">
-								<li><a href="<c:url value="/QuanLyVangNghi/danhsachnhap"/>"
-									class="menu-item">Danh Sách Nháp</a></li>
-								<li><a href="<c:url value="/QuanLyVangNghi/danhsachcho"/>"
+								<li><a href="<c:url value="/QuanLyVangNghi/danhsachcho/1"/>"
 									class="menu-item">Danh Sách Chờ Duyệt</a></li>
 								<li><a
-									href="<c:url value="/QuanLyVangNghi/danhsachduyet"/>"
+									href="<c:url value="/QuanLyVangNghi/danhsachduyet/1"/>"
 									class="menu-item">Danh Sách Đã Duyệt</a></li>
 								<li><a
-									href="<c:url value="/QuanLyVangNghi/danhsachbituchoi"/>"
+									href="<c:url value="/QuanLyVangNghi/danhsachbituchoi/1"/>"
 									class="menu-item">Danh Sách Bị Từ Chối</a></li>
 							</ul></li>
 						<li class="has-sub is-shown"><a class="menu-item" href="#">Thống
 								kê ngày nghỉ</a>
 							<ul class="menu-content">
 								<li><a
-									href="<c:url value="/QuanLyVangNghi/danhsachngaynghi"/>"
+									href="<c:url value="/QuanLyVangNghi/danhsachngaynghi/chonngay"/>"
 									class="menu-item">Danh Sách ngày nghỉ</a></li>
-							</ul></li>
-						<li class="has-sub is-shown"><a class="menu-item" href="#">Thống
-								Kê Trạng Thái</a>
-							<ul class="menu-content">
-								<li><a
-									href="<c:url value="/QuanLyVangNghi/danhsachtrangthai"/>"
-									class="menu-item">Danh Sách Trạng Thái</a></li>
 							</ul></li>
 					</ul></li>
 			</ul>
