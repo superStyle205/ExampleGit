@@ -24,7 +24,7 @@
 		<div class="content-body">
 			<div class="main-content">
 				<div class="row">
-					<form:form method="POST"  modelAttribute="employeeProfile" action="">
+					<form:form method="POST" enctype="multipart/form-data"  modelAttribute="employeeProfile" action="">
 					<form:input type="hidden" path="idEmployee" id="idEmployee"/>
 						<div class="form-group col-sm-4">
 						  	<label>Tên nhân viên</label>
@@ -73,7 +73,8 @@
 						</div>
 						<div class="form-group col-sm-4">
 						  	<label>Avatar</label>
-						  	<form:input class="form-control" path="avatar" placeholder="Avatar" />						  	
+						  	<input type="file" name="file" id="stuClass" class="btn btn-primary"/>
+							<form:errors path="avatar" cssClass="error" />					  	
 						</div>
 						<div class="col-sm-12 text-center">
 							<button type="submit" class="btn btn-success">Lưu</button>

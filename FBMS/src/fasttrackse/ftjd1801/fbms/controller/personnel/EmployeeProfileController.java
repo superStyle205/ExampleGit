@@ -79,7 +79,7 @@ public class EmployeeProfileController {
 	}
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
-	public String saveEmployee( ModelMap model) {
+	public String saveEmployee(ModelMap model) {
 		EmployeeProfile EmployeeProfile = new EmployeeProfile();
 		model.addAttribute("employeeProfile", EmployeeProfile);
 		model.addAttribute("edit", false);
@@ -87,24 +87,45 @@ public class EmployeeProfileController {
 	}
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
-	public String saveEmployee(@Valid EmployeeProfile EmployeeProfile, BindingResult result, ModelMap model)
-			throws IOException {
+	public String saveEmployee(@Valid EmployeeProfile employeeProfile, BindingResult result, ModelMap model,
+			@RequestParam CommonsMultipartFile file) throws IOException {
 		
-		
-		
-		service.saveEmployeeProfile(EmployeeProfile);
+		if (result.hasErrors()) {
+			return "QuanLyNhanSu/hosonhanvien/add_form";
+		}
+		if (service.isEmployeeProfileIdUnique(employeeProfile.getIdEmployee())) {
+			FieldError idError = new FieldError("EmployeeProfile", "idEmployee", message.getMessage("non.unique.id",
+					new String[] { String.valueOf(employeeProfile.getIdEmployee()) }, Locale.getDefault()));
+			result.addError(idError);
+			return "QuanLyNhanSu/hosonhanvien/add_form";
+		}
+
+		if (!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			byte[] bytes = file.getBytes();
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(new File(UPLOAD_DIRECTORY + File.separator + filename)));
+			stream.write(bytes);
+			stream.flush();
+			stream.close();
+			employeeProfile.setAvatar(filename);
+		} else {
+			employeeProfile.setAvatar("avatar.jpg");
+		}
+
+		service.saveEmployeeProfile(employeeProfile);
 
 		return "redirect:/QuanLyNhanSu/hoSoNhanVien/list";
 	}
 
-	@RequestMapping(value = {"/edit/{id}"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
 	public String editEmployee(@PathVariable int id, ModelMap model) {
 		EmployeeProfile emp = service.findById(id);
 		model.addAttribute("employeeProfile", emp);
 		model.addAttribute("edit", true);
 		return "QuanLyNhanSu/hosonhanvien/add_form";
 	}
-	
+
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
 	public String editEmployee(@Valid EmployeeProfile EmployeeProfile, BindingResult result, ModelMap model)
 			throws IOException {
@@ -113,15 +134,15 @@ public class EmployeeProfileController {
 
 		return "redirect:/QuanLyNhanSu/hoSoNhanVien/list";
 	}
-	
-	@RequestMapping(value = {"/delete/{id}"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public String removeEmployee(@PathVariable int id, ModelMap model) {
 		EmployeeProfile emp = service.findById(id);
 		model.addAttribute("employeeProfile", emp);
 		model.addAttribute("delete", true);
 		return "QuanLyNhanSu/hosonhanvien/add_form";
 	}
-	
+
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.POST)
 	public String removeEmployee(@Valid EmployeeProfile EmployeeProfile, BindingResult result, ModelMap model)
 			throws IOException {
