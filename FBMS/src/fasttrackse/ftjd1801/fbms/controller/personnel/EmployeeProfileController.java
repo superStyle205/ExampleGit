@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import fasttrackse.ftjd1801.fbms.service.personnel.EmployeeProfileService;
 @Controller
 @RequestMapping("/QuanLyNhanSu/hoSoNhanVien")
 public class EmployeeProfileController {
-	private static final String UPLOAD_DIRECTORY = "/upload";
+	private static final String UPLOAD_DIRECTORY = "E:\\upload";
 	String search = "";
 	@Autowired
 	EmployeeProfileService service;
@@ -88,7 +89,7 @@ public class EmployeeProfileController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	public String saveEmployee(@Valid EmployeeProfile employeeProfile, BindingResult result, ModelMap model,
-			@RequestParam CommonsMultipartFile file) throws IOException {
+			@RequestParam CommonsMultipartFile file,  HttpSession session) throws IOException {
 		
 		if (result.hasErrors()) {
 			return "QuanLyNhanSu/hosonhanvien/add_form";
