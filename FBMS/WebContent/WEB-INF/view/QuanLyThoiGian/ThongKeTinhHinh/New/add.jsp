@@ -34,7 +34,7 @@
 							 <select class="form-control"
 								name="dropdown">
 								<c:forEach items="${servicePer }" var="Employee">
-								<option >${ Employee.idEmployee}</option>
+								<option value="${ Employee.idEmployee}" >${ Employee.name}</option>
 								</c:forEach>
 
 							</select>
@@ -42,7 +42,7 @@
 							 <select class="form-control"
 								name="dropdown">
 								<c:forEach items="${servicePro }" var="Project">
-								<option >${ Project.idProject}</option>
+								<option value="${ Project.idProject}">${ Project.nameProject}</option>
 								</c:forEach>
 								
 								
@@ -52,7 +52,7 @@
 							 <select class="form-control"
 								name="dropdown">
 								<c:forEach items="${serviceRole }" var="Role">
-								<option >${ Role.Role}</option>
+								<option value="${ Role.idRole}" >${ Role.role}</option>
 								</c:forEach>
 
 							</select>
