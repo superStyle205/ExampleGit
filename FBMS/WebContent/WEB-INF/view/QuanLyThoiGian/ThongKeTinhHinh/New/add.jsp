@@ -31,31 +31,26 @@
 					<form:form method="POST" modelAttribute="LogTime" action="">
 						<div class="form-group col-sm-6">
 							<label>Mã nhân viên</label>
-							 <select class="form-control"
+							<form:select path="idEmployee" class="form-control"
 								name="dropdown">
 								<c:forEach items="${servicePer }" var="Employee">
-								<option value="${ Employee.idEmployee}" >${ Employee.name}</option>
+									<form:option value="${ Employee.idEmployee}">${ Employee.name}</form:option>
 								</c:forEach>
 
-							</select>
-							 <label>Mã dự án</label>
-							 <select class="form-control"
-								name="dropdown">
+							</form:select>
+							<label>Mã dự án</label>
+							<form:select path="idProject" class="form-control" name="dropdown">
 								<c:forEach items="${servicePro }" var="Project">
-								<option value="${ Project.idProject}">${ Project.nameProject}</option>
+									<form:option value="${ Project.idProject}">${ Project.nameProject}</form:option>
 								</c:forEach>
-								
-								
-
-							</select>
+							</form:select>
 							<label>Vai trò</label>
-							 <select class="form-control"
-								name="dropdown">
+							<form:select path="role" class="form-control" name="dropdown">
 								<c:forEach items="${serviceRole }" var="Role">
-								<option value="${ Role.idRole}" >${ Role.role}</option>
+									<form:option value="${ Role.idRole}">${ Role.role}</form:option>
 								</c:forEach>
 
-							</select>
+							</form:select>
 						</div>
 						<div class="form-group col-sm-6">
 							<label>Mô tả</label>

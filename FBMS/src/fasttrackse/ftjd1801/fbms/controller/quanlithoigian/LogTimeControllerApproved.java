@@ -24,64 +24,36 @@ public class LogTimeControllerApproved {
 
 	@Autowired
 	MessageSource message;
-	
-	
 
-	@RequestMapping(value = {"danhsachchopheduyet" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "danhsachchopheduyet" }, method = RequestMethod.GET)
 	public String listLogTimes(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
-		int nPage = 1;
-		int perPage = 4;
-		int currentPage = (nPage - 1) * perPage;
-		int recordEnd = currentPage + perPage;
+		List<LogTime> listLog = new ArrayList<LogTime>();
 
 		List<LogTime> listAllLogTimes = service.findAllLogTimes();
-		if (listAllLogTimes.size() < recordEnd) {
-			recordEnd = listAllLogTimes.size();
-		}
-		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
-		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-		
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==6) {
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 6) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
 
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("crPage", nPage);
 		model.addAttribute("LogTimes", listLog);
 
 		return "QuanLyThoiGian/PheDuyet/DanhSachChoPheDuyet/list";
 	}
-	
-	
 
-	@RequestMapping( value = {"/", "danhsachpheduyet" } , method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachpheduyet" }, method = RequestMethod.GET)
 	public String listLogTimes6(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
-		int nPage = 1;
-		int perPage = 4;
-		int currentPage = (nPage - 1) * perPage;
-		int recordEnd = currentPage + perPage;
+		List<LogTime> listLog = new ArrayList<LogTime>();
 
 		List<LogTime> listAllLogTimes = service.findAllLogTimes();
-		if (listAllLogTimes.size() < recordEnd) {
-			recordEnd = listAllLogTimes.size();
-		}
-		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
-		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-		
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==3) {
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 3) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
 
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("crPage", nPage);
 		model.addAttribute("LogTimes", listLog);
 
 		return "QuanLyThoiGian/PheDuyet/DanhSachDaPheDuyet/list";

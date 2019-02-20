@@ -13,10 +13,5 @@ public interface LogTimeDao {
 
 	List<LogTime> findAllLogTimes();
 
-	List<LogTime> findAllLogTimes(String search);
-
-	List<LogTime> getLogTimes(int fromIndex, int toIndex);
-
-	List<LogTime> getLogTimes(int fromIndex, int toIndex, String search);
 
 }

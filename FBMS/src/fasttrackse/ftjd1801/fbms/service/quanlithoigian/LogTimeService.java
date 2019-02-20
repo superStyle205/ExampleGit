@@ -15,12 +15,10 @@ public interface LogTimeService {
 
 	List<LogTime> findAllLogTimes();
 
-	List<LogTime> findAllLogTimes(String search);
-
 	boolean isLogTimeIdUnique(Integer id);
 
-	List<LogTime> getLogTimes(int fromIndex, int toIndex);
+	
 
-	List<LogTime> getLogTimes(int fromIndex, int toIndex, String search);
+	
 
 }

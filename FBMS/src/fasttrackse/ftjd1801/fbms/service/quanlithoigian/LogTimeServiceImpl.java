@@ -50,21 +50,6 @@ public class LogTimeServiceImpl implements LogTimeService {
 	}
 
 	@Override
-	public List<LogTime> findAllLogTimes(String search) {
-		return dao.findAllLogTimes(search);
-	}
-
-	@Override
-	public List<LogTime> getLogTimes(int currentPage, int perPage) {
-		return dao.getLogTimes(currentPage, perPage);
-	}
-
-	@Override
-	public List<LogTime> getLogTimes(int currentPage, int perPage, String search) {
-		return dao.getLogTimes(currentPage, perPage, search);
-	}
-
-	@Override
 	public boolean isLogTimeIdUnique(Integer id) {
 		LogTime LogTime = findById(id);
 		return (LogTime == null || (id != null));
