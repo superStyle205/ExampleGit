@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import fasttrackse.ftjd1801.fbms.entity.personnel.EmployeeProfile;
@@ -103,17 +104,17 @@ public class EmployeeProfileController {
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
 	public String saveEmployee(@PathParam(value = "chucDanh") String chucDanh, @PathParam(value ="phongBan") String phongBan, @Valid EmployeeProfile employeeProfile, BindingResult result, ModelMap model,
-			@RequestParam CommonsMultipartFile file) throws IOException {
+			@RequestParam MultipartFile file) throws IOException {
 		
 		if (result.hasErrors()) {
 			return "QuanLyNhanSu/hosonhanvien/add_form";
 		}
-		if (service.isEmployeeProfileIdUnique(employeeProfile.getIdEmployee())) {
-			FieldError idError = new FieldError("EmployeeProfile", "idEmployee", message.getMessage("non.unique.id",
-					new String[] { String.valueOf(employeeProfile.getIdEmployee()) }, Locale.getDefault()));
-			result.addError(idError);
-			return "QuanLyNhanSu/hosonhanvien/add_form";
-		}
+//		if (service.isEmployeeProfileIdUnique(employeeProfile.getIdEmployee())) {
+//			FieldError idError = new FieldError("EmployeeProfile", "idEmployee", message.getMessage("non.unique.id",
+//					new String[] { String.valueOf(employeeProfile.getIdEmployee()) }, Locale.getDefault()));
+//			result.addError(idError);
+//			return "QuanLyNhanSu/hosonhanvien/add_form";
+//		}
 
 		if (!file.isEmpty()) {
 			String filename = file.getOriginalFilename();
@@ -137,15 +138,38 @@ public class EmployeeProfileController {
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.GET)
 	public String editEmployee(@PathVariable int id, ModelMap model) {
 		EmployeeProfile emp = service.findById(id);
+		List<PhongBan> listPhongBan = phongBanService.findAll();
+		List<ChucDanh> listChucDanh = chucDanhService.findAll();
+		model.addAttribute("listPhongBan",listPhongBan);
+		model.addAttribute("listChucDanh", listChucDanh);
 		model.addAttribute("employeeProfile", emp);
 		model.addAttribute("edit", true);
 		return "QuanLyNhanSu/hosonhanvien/edit_form";
 	}
 
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
-	public String editEmployee(@Valid EmployeeProfile EmployeeProfile, BindingResult result, ModelMap model)
+	public String editEmployee(@RequestParam MultipartFile file, @PathParam(value = "chucDanh") String chucDanh, @PathParam(value ="phongBan") String phongBan, @Valid EmployeeProfile EmployeeProfile, BindingResult result, ModelMap model)
 			throws IOException {
+		
+		if (result.hasErrors()) {
+			return "QuanLyNhanSu/hosonhanvien/edit_form";
+		}
 
+		if (!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			byte[] bytes = file.getBytes();
+			BufferedOutputStream stream = new BufferedOutputStream(
+					new FileOutputStream(new File(UPLOAD_DIRECTORY + File.separator + filename)));
+			stream.write(bytes);
+			stream.flush();
+			stream.close();
+			EmployeeProfile.setAvatar(filename);
+		} else {
+			EmployeeProfile.setAvatar(EmployeeProfile.getAvatar());
+		}
+		
+		EmployeeProfile.setIdDepartment(phongBan);
+		EmployeeProfile.setIdRights(chucDanh);
 		service.updateEmployeeProfile(EmployeeProfile);
 
 		return "redirect:/QuanLyNhanSu/hoSoNhanVien/list";
@@ -154,9 +178,13 @@ public class EmployeeProfileController {
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.GET)
 	public String removeEmployee(@PathVariable int id, ModelMap model) {
 		EmployeeProfile emp = service.findById(id);
+		List<PhongBan> listPhongBan = phongBanService.findAll();
+		List<ChucDanh> listChucDanh = chucDanhService.findAll();
+		model.addAttribute("listPhongBan",listPhongBan);
+		model.addAttribute("listChucDanh", listChucDanh);
 		model.addAttribute("employeeProfile", emp);
 		model.addAttribute("delete", true);
-		return "QuanLyNhanSu/hosonhanvien/add_form";
+		return "QuanLyNhanSu/hosonhanvien/delete_form";
 	}
 
 	@RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.POST)
@@ -166,5 +194,16 @@ public class EmployeeProfileController {
 		service.deleteById(EmployeeProfile.getIdEmployee());
 
 		return "redirect:/QuanLyNhanSu/hoSoNhanVien/list";
+	}
+	
+	@RequestMapping(value = { "/viewOne/{id}" }, method = RequestMethod.GET)
+	public String viewEmployee(@PathVariable int id, ModelMap model) {
+		EmployeeProfile emp = service.findById(id);
+		List<PhongBan> listPhongBan = phongBanService.findAll();
+		List<ChucDanh> listChucDanh = chucDanhService.findAll();
+		model.addAttribute("listPhongBan",listPhongBan);
+		model.addAttribute("listChucDanh", listChucDanh);
+		model.addAttribute("employeeProfile", emp);
+		return "QuanLyNhanSu/hosonhanvien/viewOne";
 	}
 }

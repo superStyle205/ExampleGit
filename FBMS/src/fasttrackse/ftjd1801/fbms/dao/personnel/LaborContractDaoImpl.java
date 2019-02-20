@@ -36,7 +36,7 @@ public class LaborContractDaoImpl extends AbstractDao<Integer, LaborContract> im
 	@Override
 	public List<LaborContract> findAllLaborContracts(String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("typeOfContract", "%" + search + "%");
 		criteria.add(cond);
 		return (List<LaborContract>) criteria.list();
 	}
@@ -51,7 +51,7 @@ public class LaborContractDaoImpl extends AbstractDao<Integer, LaborContract> im
 	@SuppressWarnings("unchecked")
 	public List<LaborContract> getLaborContracts(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("typeOfContract", "%" + search + "%");
 		criteria.add(cond);
 		return (List<LaborContract>) criteria.list().subList(fromIndex, toIndex);
 	}

@@ -36,7 +36,7 @@ public class ExperienceDaoImpl extends AbstractDao<Integer, Experience> implemen
 	@Override
 	public List<Experience> findAllExperiences(String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("workPlace", "%" + search + "%");
 		criteria.add(cond);
 		return (List<Experience>) criteria.list();
 	}
@@ -51,7 +51,7 @@ public class ExperienceDaoImpl extends AbstractDao<Integer, Experience> implemen
 	@SuppressWarnings("unchecked")
 	public List<Experience> getExperiences(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("workPlace", "%" + search + "%");
 		criteria.add(cond);
 		return (List<Experience>) criteria.list().subList(fromIndex, toIndex);
 	}

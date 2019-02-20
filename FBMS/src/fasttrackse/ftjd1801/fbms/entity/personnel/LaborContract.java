@@ -20,14 +20,14 @@ public class LaborContract implements java.io.Serializable {
 
 	private Integer idContract;
 	private String typeOfContract;
-	private Date dayOfRest;
-	private Integer monthlySalary13;
+	private Integer dayOfRest;
+	private String monthlySalary13;
 	private Integer idEmployee;
 
 	public LaborContract() {
 	}
 
-	public LaborContract(String typeOfContract, Date dayOfRest, Integer monthlySalary13, Integer idEmployee) {
+	public LaborContract(String typeOfContract, Integer dayOfRest, String monthlySalary13, Integer idEmployee) {
 		this.typeOfContract = typeOfContract;
 		this.dayOfRest = dayOfRest;
 		this.monthlySalary13 = monthlySalary13;
@@ -55,22 +55,21 @@ public class LaborContract implements java.io.Serializable {
 		this.typeOfContract = typeOfContract;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "dayOfRest", length = 10)
-	public Date getDayOfRest() {
+	@Column(name = "dayOfRest")
+	public Integer getDayOfRest() {
 		return this.dayOfRest;
 	}
 
-	public void setDayOfRest(Date dayOfRest) {
+	public void setDayOfRest(Integer dayOfRest) {
 		this.dayOfRest = dayOfRest;
 	}
 
-	@Column(name = "monthlySalary13")
-	public Integer getMonthlySalary13() {
+	@Column(name = "monthlySalary13", length = 45)
+	public String getMonthlySalary13() {
 		return this.monthlySalary13;
 	}
 
-	public void setMonthlySalary13(Integer monthlySalary13) {
+	public void setMonthlySalary13(String monthlySalary13) {
 		this.monthlySalary13 = monthlySalary13;
 	}
 

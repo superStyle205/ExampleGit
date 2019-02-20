@@ -7,13 +7,13 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-6 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Xem nhân viên</h3>
+				<h3 class="content-header-title mb-0">Xóa nhân viên</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href='<c:url value="/home" />'>Home</a></li>
 							<li class="breadcrumb-item"><a href='<c:url value="/QuanLyNhanSu/hoSoNhanVien/" />'>Danh sách nhân viên</a></li>
-							<li class="breadcrumb-item active">Xem nhân viên</li>
+							<li class="breadcrumb-item active">Xóa nhân viên</li>
 						</ol>
 					</div>
 				</div>
@@ -93,11 +93,11 @@
 									src="/FBMS/images/${employeeProfile.avatar}">
 							</c:if>
 						</div>
-						
+						<div class="col-sm-12 text-center">
+							<button type="submit" class="btn btn-success">Xóa</button>
+						</div>
 					</form:form>
 				</div>
-				<a href="<c:url value = "/QuanLyNhanSu/hoSoNhanVien/"/>"
-					class="btn btn-primary">Quay lại</a>
 			</div>
 		</div>
 	</div>

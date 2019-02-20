@@ -36,7 +36,7 @@ public class CertificateDaoImpl extends AbstractDao<Integer, Certificate> implem
 	@Override
 	public List<Certificate> findAllCertificates(String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("typeOfCertificate", "%" + search + "%");
 		criteria.add(cond);
 		return (List<Certificate>) criteria.list();
 	}
@@ -51,7 +51,7 @@ public class CertificateDaoImpl extends AbstractDao<Integer, Certificate> implem
 	@SuppressWarnings("unchecked")
 	public List<Certificate> getCertificates(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("typeOfCertificate", "%" + search + "%");
 		criteria.add(cond);
 		return (List<Certificate>) criteria.list().subList(fromIndex, toIndex);
 	}
