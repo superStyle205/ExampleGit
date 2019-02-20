@@ -36,7 +36,7 @@ public class RelativeInformationDaoImpl extends AbstractDao<Integer, RelativeInf
 	@Override
 	public List<RelativeInformation> findAllRelativeInformations(String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("name", "%" + search + "%");
 		criteria.add(cond);
 		return (List<RelativeInformation>) criteria.list();
 	}
@@ -51,7 +51,7 @@ public class RelativeInformationDaoImpl extends AbstractDao<Integer, RelativeInf
 	@SuppressWarnings("unchecked")
 	public List<RelativeInformation> getRelativeInformations(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("idEmployee", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("name", "%" + search + "%");
 		criteria.add(cond);
 		return (List<RelativeInformation>) criteria.list().subList(fromIndex, toIndex);
 	}
