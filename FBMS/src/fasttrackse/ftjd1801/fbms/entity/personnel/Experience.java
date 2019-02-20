@@ -21,16 +21,16 @@ public class Experience implements java.io.Serializable {
 	private Integer idExperience;
 	private Date timeLine;
 	private String workPlace;
-	private String describe;
+	private String describes;
 	private Integer idEmployee;
 
 	public Experience() {
 	}
 
-	public Experience(Date timeLine, String workPlace, String describe, Integer idEmployee) {
+	public Experience(Date timeLine, String workPlace, String describes, Integer idEmployee) {
 		this.timeLine = timeLine;
 		this.workPlace = workPlace;
-		this.describe = describe;
+		this.describes = describes;
 		this.idEmployee = idEmployee;
 	}
 
@@ -65,13 +65,13 @@ public class Experience implements java.io.Serializable {
 		this.workPlace = workPlace;
 	}
 
-	@Column(name = "describe", length = 65535)
-	public String getDescribe() {
-		return this.describe;
+	@Column(name = "describes", length = 65535)
+	public String getDescribes() {
+		return this.describes;
 	}
 
-	public void setDescribe(String describe) {
-		this.describe = describe;
+	public void setDescribes(String describes) {
+		this.describes = describes;
 	}
 
 	@Column(name = "id_employee")

@@ -30,9 +30,9 @@ public class EmployeeProfile implements java.io.Serializable {
 	private String contact;
 	private String email;
 	private String introduction;
-	private Integer idRights;
+	private String idRights;
 	private String note;
-	private Integer idDepartment;
+	private String idDepartment;
 	private Integer dayOfRest;
 	private String avatar;
 
@@ -40,7 +40,7 @@ public class EmployeeProfile implements java.io.Serializable {
 	}
 
 	public EmployeeProfile(String name, Integer sex, Date dayOfBirth, String address, String contact, String email,
-			String introduction, Integer idRights, String note, Integer idDepartment, Integer dayOfRest, String avatar) {
+			String introduction, String idRights, String note, String idDepartment, Integer dayOfRest, String avatar) {
 		this.name = name;
 		this.sex = sex;
 		this.dayOfBirth = dayOfBirth;
@@ -131,12 +131,12 @@ public class EmployeeProfile implements java.io.Serializable {
 		this.introduction = introduction;
 	}
 
-	@Column(name = "id_rights")
-	public Integer getIdRights() {
+	@Column(name = "id_rights", length = 30)
+	public String getIdRights() {
 		return this.idRights;
 	}
 
-	public void setIdRights(Integer idRights) {
+	public void setIdRights(String idRights) {
 		this.idRights = idRights;
 	}
 
@@ -149,12 +149,12 @@ public class EmployeeProfile implements java.io.Serializable {
 		this.note = note;
 	}
 
-	@Column(name = "id_department")
-	public Integer getIdDepartment() {
+	@Column(name = "id_department", length = 30)
+	public String getIdDepartment() {
 		return this.idDepartment;
 	}
 
-	public void setIdDepartment(Integer idDepartment) {
+	public void setIdDepartment(String idDepartment) {
 		this.idDepartment = idDepartment;
 	}
 

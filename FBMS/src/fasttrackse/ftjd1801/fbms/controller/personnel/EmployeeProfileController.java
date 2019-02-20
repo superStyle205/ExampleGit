@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -22,15 +23,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import fasttrackse.ftjd1801.fbms.entity.personnel.EmployeeProfile;
+import fasttrackse.ftjd1801.fbms.entity.security.ChucDanh;
+import fasttrackse.ftjd1801.fbms.entity.security.PhongBan;
 import fasttrackse.ftjd1801.fbms.service.personnel.EmployeeProfileService;
+import fasttrackse.ftjd1801.fbms.service.security.ChucDanhService;
+import fasttrackse.ftjd1801.fbms.service.security.PhongBanService;
 
 @Controller
 @RequestMapping("/QuanLyNhanSu/hoSoNhanVien")
 public class EmployeeProfileController {
-	private static final String UPLOAD_DIRECTORY = "/upload";
+	private static final String UPLOAD_DIRECTORY = "E:\\upload";
 	String search = "";
 	@Autowired
 	EmployeeProfileService service;
+	
+	@Autowired
+	PhongBanService phongBanService;
+	
+	@Autowired
+	ChucDanhService chucDanhService;
 
 	@Autowired
 	MessageSource message;
@@ -81,13 +92,17 @@ public class EmployeeProfileController {
 	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
 	public String saveEmployee(ModelMap model) {
 		EmployeeProfile EmployeeProfile = new EmployeeProfile();
+		List<PhongBan> listPhongBan = phongBanService.findAll();
+		List<ChucDanh> listChucDanh = chucDanhService.findAll();
 		model.addAttribute("employeeProfile", EmployeeProfile);
+		model.addAttribute("listPhongBan",listPhongBan);
+		model.addAttribute("listChucDanh", listChucDanh);
 		model.addAttribute("edit", false);
 		return "QuanLyNhanSu/hosonhanvien/add_form";
 	}
 
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
-	public String saveEmployee(@Valid EmployeeProfile employeeProfile, BindingResult result, ModelMap model,
+	public String saveEmployee(@PathParam(value = "chucDanh") String chucDanh, @PathParam(value ="phongBan") String phongBan, @Valid EmployeeProfile employeeProfile, BindingResult result, ModelMap model,
 			@RequestParam CommonsMultipartFile file) throws IOException {
 		
 		if (result.hasErrors()) {
@@ -112,7 +127,8 @@ public class EmployeeProfileController {
 		} else {
 			employeeProfile.setAvatar("avatar.jpg");
 		}
-
+		employeeProfile.setIdDepartment(phongBan);
+		employeeProfile.setIdRights(chucDanh);
 		service.saveEmployeeProfile(employeeProfile);
 
 		return "redirect:/QuanLyNhanSu/hoSoNhanVien/list";
@@ -123,7 +139,7 @@ public class EmployeeProfileController {
 		EmployeeProfile emp = service.findById(id);
 		model.addAttribute("employeeProfile", emp);
 		model.addAttribute("edit", true);
-		return "QuanLyNhanSu/hosonhanvien/add_form";
+		return "QuanLyNhanSu/hosonhanvien/edit_form";
 	}
 
 	@RequestMapping(value = { "/edit/{id}" }, method = RequestMethod.POST)
