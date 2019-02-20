@@ -55,4 +55,6 @@ public class LogTimeDaoImpl extends AbstractDao<Integer, LogTime> implements Log
 		criteria.add(cond);
 		return (List<LogTime>) criteria.list().subList(fromIndex, toIndex);
 	}
+	
+	
 }

@@ -18,7 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fasttrackse.ftjd1801.fbms.entity.personnel.EmployeeProfile;
+import fasttrackse.ftjd1801.fbms.entity.projectmanage.Project;
+import fasttrackse.ftjd1801.fbms.entity.projectmanage.RoleAll;
 import fasttrackse.ftjd1801.fbms.entity.quanlithoigian.LogTime;
+import fasttrackse.ftjd1801.fbms.service.personnel.EmployeeProfileService;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.ProjectService;
+import fasttrackse.ftjd1801.fbms.service.projectmanage.RoleAllService;
 import fasttrackse.ftjd1801.fbms.service.quanlithoigian.LogTimeService;
 
 @Controller
@@ -26,20 +32,33 @@ import fasttrackse.ftjd1801.fbms.service.quanlithoigian.LogTimeService;
 public class LogTimeControllerStatistical {
 
 	String search = "";
-	
+
 	@Autowired
 	LogTimeService service;
+
+	@Autowired
+	EmployeeProfileService servicePer;
 	
 	@Autowired
-	MessageSource message;
+	RoleAllService serviceRole;
 	
-	
+	@Autowired
+	ProjectService servicePro;
 
-	
+	@Autowired
+	MessageSource message;
+
 	@RequestMapping(value = { "/add" }, method = RequestMethod.GET)
 	public String newEmployee(ModelMap model) {
 		LogTime LogTime = new LogTime();
+		List<Project> list=servicePro.listAll();
+		List<EmployeeProfile> listEmpl=servicePer.findAllEmployeeProfiles();
+		List<RoleAll> listRole= serviceRole.findAll();
 		model.addAttribute("LogTime", LogTime);
+		model.addAttribute("servicePro",list );
+		model.addAttribute("servicePer", listEmpl);
+		model.addAttribute("serviceRole", listRole);
+		
 		model.addAttribute("edit", false);
 		return "QuanLyThoiGian/ThongKeTinhHinh/New/add";
 	}
@@ -48,7 +67,7 @@ public class LogTimeControllerStatistical {
 	 * This method will provide the medium to add a new employee.
 	 */
 	@RequestMapping(value = { "/add" }, method = RequestMethod.POST)
-	public String saveEmployee(@ModelAttribute("LogTime")  LogTime LogTime, ModelMap model) throws IOException {
+	public String saveEmployee(@ModelAttribute("LogTime") LogTime LogTime, ModelMap model) throws IOException {
 
 		service.saveLogTime(LogTime);
 		return "redirect:/QuanLyThoiGian/nhanVien/add";
@@ -102,12 +121,10 @@ public class LogTimeControllerStatistical {
 		model.addAttribute("delete", true);
 		return "Add";
 	}
-	
-	
 
-	@RequestMapping(value = {"/", "danhsachchopheduyetlan1" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachchopheduyetlan1" }, method = RequestMethod.GET)
 	public String listLogTimes(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
+		List<LogTime> listLog = new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -120,9 +137,9 @@ public class LogTimeControllerStatistical {
 		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-		
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==1) {
+
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 1) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
@@ -133,11 +150,10 @@ public class LogTimeControllerStatistical {
 
 		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachChoPheDuyet1/list";
 	}
-	 
 
-	@RequestMapping(value = {"/", "danhsachchopheduyetlan2" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachchopheduyetlan2" }, method = RequestMethod.GET)
 	public String listLogTimes2(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
+		List<LogTime> listLog = new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -151,24 +167,22 @@ public class LogTimeControllerStatistical {
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
 
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==2) {
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 2) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
-		
+
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("crPage", nPage);
 		model.addAttribute("LogTimes", listLog);
 
 		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachChoPheDuyet2/list";
 	}
-	
-	
 
-	@RequestMapping(value = {"/", "danhsachdapheduyet" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachdapheduyet" }, method = RequestMethod.GET)
 	public String listLogTimes3(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
+		List<LogTime> listLog = new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -181,9 +195,9 @@ public class LogTimeControllerStatistical {
 		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-		
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==3) {
+
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 3) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
@@ -194,12 +208,10 @@ public class LogTimeControllerStatistical {
 
 		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachDaPheDuyet/list";
 	}
-	
-	
 
-	@RequestMapping(value = {"/", "danhsachnhap" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachnhap" }, method = RequestMethod.GET)
 	public String listLogTimes4(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
+		List<LogTime> listLog = new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -213,24 +225,22 @@ public class LogTimeControllerStatistical {
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
 
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==4) {
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 4) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
-		
+
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("crPage", nPage);
 		model.addAttribute("LogTimes", listLog);
 
 		return "QuanLyThoiGian/ThongKeTinhHinh/DanhSachNhap/list";
 	}
-	
-	
 
-	@RequestMapping(value = {"/", "danhsachbituchoi" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "danhsachbituchoi" }, method = RequestMethod.GET)
 	public String listLogTimes5(ModelMap model) {
-		List<LogTime> listLog=new ArrayList<LogTime>();
+		List<LogTime> listLog = new ArrayList<LogTime>();
 		int nPage = 1;
 		int perPage = 4;
 		int currentPage = (nPage - 1) * perPage;
@@ -243,9 +253,9 @@ public class LogTimeControllerStatistical {
 		List<LogTime> LogTimes = service.getLogTimes(currentPage, recordEnd);
 
 		int totalPage = (int) Math.ceil((double) listAllLogTimes.size() / perPage);
-		
-		for(int i=0;i<listAllLogTimes.size();i++) {
-			if(listAllLogTimes.get(i).getStatus()==5) {
+
+		for (int i = 0; i < listAllLogTimes.size(); i++) {
+			if (listAllLogTimes.get(i).getStatus() == 5) {
 				listLog.add(listAllLogTimes.get(i));
 			}
 		}
