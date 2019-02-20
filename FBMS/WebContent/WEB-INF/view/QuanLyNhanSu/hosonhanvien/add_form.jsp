@@ -25,40 +25,20 @@
 			<div class="main-content">
 				<div class="row">
 					<form:form method="POST" enctype="multipart/form-data"  modelAttribute="employeeProfile" action="">
-					<form:input type="hidden" path="idEmployee" id="idEmployee"/>
+					
 						<div class="form-group col-sm-4">
 						  	<label>Tên nhân viên</label>
 						  	<form:input class="form-control" path="name" placeholder="Họ và tên" />
 						</div>
-						<div class="form-group col-sm-2">
-						  	<label>Giới tính</label>
-						  	<form:input class="form-control" path="sex" placeholder="Giới tính" />
-						  	
-						</div>
+						
 						<div class="form-group col-sm-4">
 						  	<label>Ngày sinh</label>
 						  	<form:input type="date" class="form-control" value="${employeeProfile.dayOfBirth}" path="dayOfBirth" placeholder="Ngày sinh" />						  	
 						</div>
-						<div class="form-group col-sm-6">
-						  	<label>Địa chỉ</label>
-						  	<form:input class="form-control" path="address" placeholder="Địa chỉ" />						  	
-						</div>
-						<div class="form-group col-sm-4">
+						<div class="form-group col-sm-3">
 						  	<label>Số điện thoại</label>
 						  	<form:input class="form-control" path="contact" placeholder="Liên hệ" />						  	
-						</div>
-						<div class="form-group col-sm-4">
-						  	<label>Email</label>
-						  	<form:input class="form-control" path="email" placeholder="Email" />						  	
-						</div>						
-						<div class="form-group col-sm-4">
-						  	<label>Bộ phận</label>
-						  	<form:input class="form-control" path="idDepartment" placeholder="Bộ phận" />						  	
-						</div>
-						<div class="form-group col-sm-4">
-						  	<label>Ngày nghỉ</label>
-						  	<form:input class="form-control" path="dayOfRest" placeholder="Ngày nghỉ" />						  	
-						</div>
+						</div>	
 						<div class="form-group col-sm-6">
 						  	<label>Giới thiệu</label>
 						  	<form:textarea class="form-control"  path="introduction" placeholder="Giới thiệu" />						  	
@@ -66,10 +46,46 @@
 						<div class="form-group col-sm-6">
 						  	<label>Ghi chú</label>
 						  	<form:textarea class="form-control" path="note" placeholder="Ghi chú" />						  	
+						</div>					
+						<div class="form-group col-sm-4">
+						  	<label>Email</label>
+						  	<form:input class="form-control" path="email" placeholder="Email" />						  	
+						</div>						
+		
+						<div class="form-group col-sm-3">
+						  	<label>Ngày nghỉ</label>
+						  	<form:input class="form-control" path="dayOfRest" placeholder="Ngày nghỉ" />						  	
+						</div>
+						<div class="form-group col-sm-5">
+						  	<label>Địa chỉ</label>
+						  	<form:input class="form-control" path="address" placeholder="Địa chỉ" />						  	
+						</div>
+						
+						<div class="form-group col-sm-4">
+						  	<label style="margin-right: 10px;">Giới tính: </label>
+						  	<form:radiobutton path="sex" value="1" />
+							Nam 
+							<form:radiobutton path="sex" value="2" />
+							Nữ 
+						  	<form:radiobutton path="sex" value="3" />
+							Khác 
+						</div>
+						<div class="form-group col-sm-4">
+						  	<label>Bộ phận</label>
+						  	<select id="phongBan" name="phongBan">
+								<c:forEach var="tempPhongBan" items="${listPhongBan}">
+									<option value="${tempPhongBan.maPhongBan}">${tempPhongBan.tenPhongBan}</option>
+								</c:forEach>
+							</select>
+						  							  	
 						</div>
 						<div class="form-group col-sm-4">
 						  	<label>Quyền hạn</label>
-						  	<form:input class="form-control" path="idRights" placeholder="Quyền" />						  	
+						  	<select id="chucDanh" name="chucDanh">
+								<c:forEach var="tempChucDanh" items="${listChucDanh}">
+									<option value="${tempChucDanh.maChucDanh}">${tempChucDanh.tenChucDanh}</option>
+								</c:forEach>
+							</select>						  	
 						</div>
 						<div class="form-group col-sm-4">
 						  	<label>Avatar</label>

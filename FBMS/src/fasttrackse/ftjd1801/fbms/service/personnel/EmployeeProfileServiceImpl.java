@@ -73,4 +73,5 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 	public boolean isEmployeeProfileIdUnique(Integer id) {
 		EmployeeProfile EmployeeProfile = findById(id);
 		return (EmployeeProfile == null || (id != null));
-	}}
+	}
+}
