@@ -61,6 +61,8 @@
 							<label>Ngày tạo log</label>
 							<form:input type="date" class="form-control" path="dayLog"
 								placeholder="Ngày tạo log" />
+							<label>Trạng thái</label>
+							<form:input class="form-control" path="status" placeholder="Trạng thái" />
 
 						</div>
 						<div class="col-sm-12 text-center">

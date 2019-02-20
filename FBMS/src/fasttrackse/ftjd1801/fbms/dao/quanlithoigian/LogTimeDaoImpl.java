@@ -32,12 +32,4 @@ public class LogTimeDaoImpl extends AbstractDao<Integer, LogTime> implements Log
 		return (List<LogTime>) criteria.list();
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<LogTime> getLogTimes(int fromIndex, int toIndex, String search) {
-		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("describes", "%" + search + "%");
-		criteria.add(cond);
-		return (List<LogTime>) criteria.list().subList(fromIndex, toIndex);
-	}
-
 }

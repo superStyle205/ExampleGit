@@ -63,8 +63,7 @@
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a
-						href="<c:url value = "/QuanLyThoiGian/nhanVien/add" />"
+					<a href="<c:url value = "/QuanLyThoiGian/nhanVien/add" />"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -122,11 +121,6 @@
 												<td>${tempLogTime.role}</td>
 												<td>${tempLogTime.time}</td>
 												<td>${tempLogTime.dayLog}</td>
-												<td><a href="/FBMS/QuanLyThoiGian/nhanVien/edit-${tempLogTime.idLog}-LogTime"><i
-								class="fas fa-edit"></i></a> <a
-							href="/FBMS/QuanLyThoiGian/nhanVien/delete-${tempLogTime.idLog}-LogTime"><i
-								class="fas fa-trash"></i></a></td>
-												
 											</tr>
 										</c:forEach>
 										<thead>
