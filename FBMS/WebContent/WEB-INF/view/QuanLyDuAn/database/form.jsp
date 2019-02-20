@@ -52,12 +52,13 @@
 						<div class="form-group col-sm-6">
 							<label>Tên database</label>
 							<form:input class="form-control" path="nameDatabase"
-								placeholder="Tên database" />
+								placeholder="Tên database" required="true"/>
+								
 						</div>
 							<div class="form-group col-sm-6">
 							<label>Mô tả</label>
 							<form:textarea class="form-control" path="note"
-								placeholder="Tên database" />
+								placeholder="mô tả database" />
 						</div>
 						<div class="col-sm-12 text-center">
 							<c:choose>

@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> findAll(String search) {
-		return dao.listAll();
+		return dao.listAll(search);
 	}
 
 	@Override

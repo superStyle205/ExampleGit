@@ -131,4 +131,10 @@ public class FrameworkController {
 		}
 		return "redirect:/QuanLyDuAn/Framework/list-framework";
 	}
+	@RequestMapping(value = "view/{maFramework}", method = RequestMethod.GET)
+	public String viewOne(@PathVariable("maFramework") int maFramework,ModelMap model) {
+		model.addAttribute("framework", frameworkService.findById(maFramework));
+		return "QuanLyDuAn/framework/viewOne";
+	}
+	
 }

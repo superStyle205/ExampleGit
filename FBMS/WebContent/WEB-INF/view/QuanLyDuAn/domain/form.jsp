@@ -49,16 +49,29 @@
 			<div class="main-content">
 				<div class="row">
 					<form:form method="POST" modelAttribute="domain" action="">
+						<c:choose>
+							<c:when test="${edit}">
+								<div class="form-group col-sm-6">
+									<label>Mã domain</label>
+									<form:input class="form-control" path="idDomain"
+										 readonly="true" />
+								</div>
+							</c:when>
+							<c:when test="${delete}">
+								<div class="form-group col-sm-6">
+									<label>Mã domain</label>
+									<form:input class="form-control" path="idDomain"
+										 readonly="true" />
+								</div>
+							</c:when>
+							<c:otherwise>
+
+							</c:otherwise>
+						</c:choose>
 						<div class="form-group col-sm-6">
 							<label>Tên domain</label>
 							<form:input class="form-control" path="nameDomain"
 								placeholder="Tên domain" />
-						</div>
-						<div class="form-group col-sm-6">
-							<label>Mã domain</label>
-							<form:input class="form-control" path="idDomain"
-								placeholder="Mã domain" />
-							<form:errors path="idDomain" cssClass="error" />
 						</div>
 						<div class="col-sm-12 text-center">
 							<c:choose>

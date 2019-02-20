@@ -20,7 +20,7 @@ import fasttrackse.ftjd1801.fbms.service.projectmanage.ProgramingLanguageService
 @Controller
 @RequestMapping(value = "/QuanLyDuAn/NgonNgu/list-ngonNgu")
 public class ProgramingLanguageController {
-	String search;
+	String search="";
 	
 	@Autowired
 	ProgramingLanguageService service;
@@ -114,7 +114,7 @@ public class ProgramingLanguageController {
 	public String deleteForm(@PathVariable("maLanguage") int maLanguage, ModelMap model) {
 		model.addAttribute("language", service.findById(maLanguage));
 		model.addAttribute("delete", true);
-		return "QuanLyDuAn/programminglanguage/form";
+		return "QuanLyDuAn/programinglanguage/form";
 	}
 	@RequestMapping(value = "/delete/{maLanguage}", method = RequestMethod.POST)
 	public String delete(@PathVariable("maLanguage") int maLanguage, final RedirectAttributes redirectAttributes) {

@@ -26,8 +26,10 @@ public class CustomerDaoImpl extends AbstractDao<Integer, Customer> implements C
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> listAll() {
+	public List<Customer> listAll(String search) {
 		Criteria criteria = createEntityCriteria();
+		Criterion cond = Restrictions.ilike("nameCustomer", "%" + search + "%");
+		criteria.add(cond);
 		return (List<Customer>) criteria.list();
 	}
 

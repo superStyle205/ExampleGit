@@ -111,11 +111,6 @@
 											<tr>
 												<th>Mã khách hàng</th>
 												<th>Tên khách hàng</th>
-												<th>Số điện thoại</th>
-												<th>Email</th>
-												<th>Giới tính</th>
-												<th>Địa chỉ</th>
-												<th>Ngày sinh</th>
 												<th></th>
 
 											</tr>
@@ -125,25 +120,13 @@
 												<tr>
 													<td>${customer.idCustomer }</td>
 													<td>${customer.nameCustomer }</td>
-													<td>${customer.contact }</td>
-													<td>${customer.email }</td>
-													<td><c:choose>
-															<c:when test="${customer.sex eq 1 }">
-																<p>Nam</p>
-															</c:when>
-															<c:when test="${customer.sex eq 2 }">
-																<p>Nữ</p>
-															</c:when>
-														</c:choose></td>
-													<td>${customer.address }</td>
-													<td><fmt:formatDate value="${customer.dayOfBirth }"
-															pattern="dd-MM-yyyy" /></td>
-
 													<td><a
+														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/view/${customer.idCustomer}' />"><i
+															class='fa fa-eye'></i>   </a><a
 														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/edit/${customer.idCustomer}' />"><i
-															class='fa fa-pencil'></i></a> <a
+															class='fa fa-pencil'></i>   </a><a
 														href="<c:url value='/QuanLyDuAn/KhachHang/list-khachHang/delete/${customer.idCustomer}' />"><i
-															class='fa fa-trash'></i></a></td>
+															class='fa fa-trash'></i>   </a></td>
 												</tr>
 											</c:forEach>
 											<div class="modal fade" id="confirm-delete" tabindex="-1"

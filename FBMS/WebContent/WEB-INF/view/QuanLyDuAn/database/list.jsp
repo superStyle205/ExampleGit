@@ -133,6 +133,8 @@
 													<td>${database.idDatabase }</td>
 													<td>${database.nameDatabase }</td>
 													<td><a
+														href="<c:url value='/QuanLyDuAn/Database/list-database/view/${database.idDatabase}' />"><i
+															class='fa fa-eye'></i></a> <a
 														href="<c:url value='/QuanLyDuAn/Database/list-database/edit/${database.idDatabase}' />"><i
 															class='fa fa-pencil'></i></a> <a
 														href="<c:url value='/QuanLyDuAn/Database/list-database/delete/${database.idDatabase}' />"><i

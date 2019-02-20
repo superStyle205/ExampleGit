@@ -49,15 +49,15 @@
 		<!-- Path -->
 		<div class="content-header row">
 			<div class="content-header-left col-md-9 col-xs-12 mb-2">
-				<h3 class="content-header-title mb-0">Danh sách ngôn ngữ</h3>
+				<h3 class="content-header-title mb-0">Danh sách Công nghệ</h3>
 				<div class="row breadcrumbs-top">
 					<div class="breadcrumb-wrapper col-xs-12">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a
 								href='<c:url value="/home" />'>Home</a></li>
-							<li class="breadcrumb-item active">Danh sách ngôn ngữ</li>
+							<li class="breadcrumb-item active">Danh sách công nghệ</li>
 						</ol>
-						<form action="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/search"
+						<form action="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/search"
 							method="GET">
 							<input type="text" name="searchName" placeholder="Search...">
 							<button class="btn btn-default" type="submit">
@@ -70,7 +70,7 @@
 			<div class="content-header-right col-md-3 col-xs-12">
 				<div role="group" aria-label="Button group with nested dropdown"
 					class="btn-group float-md-right" id="add-new">
-					<a href="<c:url value = "/QuanLyDuAn/NgonNgu/list-ngonNgu/add"/>"
+					<a href="<c:url value = "/QuanLyDuAn/CongNghe/list-congNghe/add"/>"
 						class="btn btn-primary"><span class="fa fa-plus"></span> Thêm
 						mới</a>
 				</div>
@@ -103,7 +103,7 @@
 				<div class="col-xs-12">
 					<div class="card">
 						<div class="card-header">
-							<h4 class="card-title">Danh sách ngôn ngữ</h4>
+							<h4 class="card-title">Danh sách database</h4>
 							<a class="heading-elements-toggle"><i
 								class="fa fa-ellipsis-v font-medium-3"></i></a>
 							<div class="heading-elements">
@@ -122,20 +122,22 @@
 										class="table table-striped table-bordered dataex-res-constructor">
 										<thead>
 											<tr>
-												<th>Mã ngôn ngữ</th>
-												<th>Tên ngôn ngữ</th>
+												<th>Mã Công nghệ</th>
+												<th>Tên Công nghệ</th>
 												<th></th>
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${listLanguage}" var="language">
+											<c:forEach items="${listTech}" var="technology">
 												<tr>
-													<td>${language.idLanguage }</td>
-													<td>${language.nameLanguage }</td>
+													<td>${technology.idTechnology }</td>
+													<td>${technology.nameTechnology }</td>
 													<td><a
-														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/edit/${language.idLanguage}' />"><i
+														href="<c:url value='/QuanLyDuAn/CongNghe/list-congNghe/view/${technology.idTechnology}' />"><i
+															class='fa fa-eye'></i></a> <a
+														href="<c:url value='/QuanLyDuAn/CongNghe/list-congNghe/edit/${technology.idTechnology}' />"><i
 															class='fa fa-pencil'></i></a> <a
-														href="<c:url value='/QuanLyDuAn/NgonNgu/list-ngonNgu/delete/${language.idLanguage}' />"><i
+														href="<c:url value='/QuanLyDuAn/CongNghe/list-congNghe/delete/${technology.idTechnology}' />"><i
 															class='fa fa-trash'></i></a></td>
 												</tr>
 											</c:forEach>
@@ -170,10 +172,10 @@
 									<ul class="pagination" style="margin-left: 65%;">
 										<c:if test="${pageid != 1}">
 											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/1">Fisrt
+												href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/1">Fisrt
 													page</a></li>
 											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid -1 }">Previous
+												href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid -1 }">Previous
 													page</a></li>
 										</c:if>
 										<c:choose>
@@ -185,15 +187,15 @@
 												<c:choose>
 													<c:when test="${pageid eq 1}">
 														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid}">1</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid}">1</a></li>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid+1}">2</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid+1}">2</a></li>
 													</c:when>
 													<c:when test="${pageid eq 2}">
 														<li class="page-item "><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid-1}">1</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid-1}">1</a></li>
 														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid} ">2</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid} ">2</a></li>
 													</c:when>
 												</c:choose>
 
@@ -202,37 +204,37 @@
 												<c:choose>
 													<c:when test="${pageid eq 1}">
 														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid} ">${pageid}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid} ">${pageid}</a></li>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid+1} ">${pageid+1}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid+1} ">${pageid+1}</a></li>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid+2} ">${pageid+2}</a>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid+2} ">${pageid+2}</a>
 													</c:when>
 													<c:when test="${pageid eq noOfPages}">
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid-2} ">${pageid-2}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid-2} ">${pageid-2}</a></li>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid-1} ">${pageid-1}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid-1} ">${pageid-1}</a></li>
 														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid} ">${pageid}</a>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid} ">${pageid}</a>
 													</c:when>
 													<c:otherwise>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid-1} ">${pageid-1}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid-1} ">${pageid-1}</a></li>
 														<li class="page-item active"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid} ">${pageid}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid} ">${pageid}</a></li>
 														<li class="page-item"><a class="page-link"
-															href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid+1} ">${pageid+1}</a></li>
+															href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid+1} ">${pageid+1}</a></li>
 													</c:otherwise>
 												</c:choose>
 											</c:otherwise>
 										</c:choose>
 										<c:if test="${pageid lt noOfPages}">
 											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${pageid+1}">Next
+												href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${pageid+1}">Next
 													page</a></li>
 											<li class="page-item"><a class="page-link"
-												href="/FBMS/QuanLyDuAn/NgonNgu/list-ngonNgu/${noOfPages} ">Last
+												href="/FBMS/QuanLyDuAn/CongNghe/list-congNghe/${noOfPages} ">Last
 													page</a></li>
 										</c:if>
 									</ul>

@@ -85,12 +85,8 @@ public class CustomerController {
 	public String doAdd(Model model, @ModelAttribute("customer") Customer ct,
 			final RedirectAttributes redirectAttributes) {
 
-		try {
 			customerService.saveCustomer(ct);
-			redirectAttributes.addFlashAttribute("messageSuccess", "Thêm mới thành công..");
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
-		}
+
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 
 	}
@@ -106,12 +102,9 @@ public class CustomerController {
 	@RequestMapping(value = "/edit/{idCustomer}", method = RequestMethod.POST)
 	public String doEdit(Model model, @ModelAttribute("customer") Customer ct,
 			final RedirectAttributes redirectAttributes) {
-		try {
+		
 			customerService.update(ct);
-			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công..");
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
-		}
+
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 	}
 
@@ -132,5 +125,9 @@ public class CustomerController {
 		}
 		return "redirect:/QuanLyDuAn/KhachHang/list-khachHang";
 	}
-
+	@RequestMapping(value="/view/{idCustomer}", method = RequestMethod.GET)
+	public String viewOne(@PathVariable("idCustomer") int idCustomer, ModelMap model) {
+		model.addAttribute("customer", customerService.findByIdCustomer(idCustomer));
+		return "QuanLyDuAn/khachhang/viewOne";
+	}
 }

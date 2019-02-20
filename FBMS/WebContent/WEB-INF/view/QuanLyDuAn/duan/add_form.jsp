@@ -29,69 +29,90 @@
 		<div class="content-body">
 			<div class="main-content">
 				<form:form method="POST" modelAttribute="project" action="">
-					<div class="row">
-						<div class="form-group col-sm-12">
-							<label>Tên dự án</label>
-							<form:input class="form-control" path="nameProject"
-								placeholder="Tên dự án*" />
-						</div>
+
+					<div class="form-group col-sm-12">
+						<label>Tên dự án</label>
+						<form:input class="form-control" path="nameProject"
+							placeholder="Tên dự án*" />
 					</div>
+
 					<div class="row">
 						<div class="form-group col-md-3 col-sm-12">
-							<label>Khách hàng</label>
-							<div id="list1" class="dropdown-check-list" tabindex="100">
-								<button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" >Khách hàng</button>
-								<ul class="multiselect-container dropdown-menu">
-									<c:forEach items="${listCustomer}" var="customer">
-										<li class="multiselect"><input type="checkbox" />${customer.nameCustomer}</li>
-									</c:forEach>
-								</ul>
-							</div>
+							<label>Khách hàng</label><br>
+							<form:select class="form-control" path="idCustomer">
+								<c:forEach items="${listCustomer}" var="customer">
+									<form:option value="${customer.idCustomer }">${customer.nameCustomer}</form:option>
+								</c:forEach>
+							</form:select>
+
 						</div>
 						<div class="form-group col-md-3 col-sm-12">
 							<label>Ngày bắt đầu: </label>
-							<input type="date" data-provide="datepicker" class="form-control"
-								placeholder="Start date *">
+							<form:input path="startDate" type="date"
+								data-provide="datepicker" class="form-control"
+								placeholder="Start date *" />
 						</div>
 						<div class="form-group col-md-3 col-sm-12">
-						<label>Ngày kết thúc: </label>
-							<input type="date" data-provide="datepicker" class="form-control"
-								placeholder="End date *">
+							<label>Ngày kết thúc: </label>
+							<form:input path="endDate" type="date" data-provide="datepicker"
+								class="form-control" placeholder="End date *" />
 						</div>
 						<div class="form-group col-md-3 col-sm-12">
-							<label>Chọn phòng dự án</label> <select>
-								<option></option>
-							</select>
+							<label>Chọn phòng dự án</label><br>
+							<form:select class="form-control" path="projectDivision">
+								<c:forEach items="${phongDuAn}" var="phong">
+									<form:option value="${phong.maPhongBan }">${phong.tenPhongBan}</form:option>
+								</c:forEach>
+							</form:select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-3">
-							<label>Domain: </label> <select>
+							<label>Domain: </label><br>
+							<form:select class="form-control" path="domain">
 								<c:forEach items="${listDomain}" var="domain">
-									<option>${domain.nameDomain}</option>
+									<form:option value="${domain.idDomain }">${domain.nameDomain}</form:option>
 								</c:forEach>
-							</select>
+							</form:select>
 						</div>
 						<div class="col-sm-12 col-md-3">
-							<label>Framework: </label> <select>
+							<label>Framework: </label><br> 
+							<select class="form-control" name="framework">
 								<c:forEach items="${listFramework}" var="framework">
-									<option>${framework.technology }</option>
+									<option value="${framework.idFramework }">${framework.technology }</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="col-sm-12 col-md-3">
-							<label>Database: </label><select>
+							<label>Database: </label><br>
+							<select class="form-control" name="database">
 								<c:forEach items="${listDatabase}" var="database">
-									<option>${database.nameDatabase }</option>
+									<option value="${database.idDatabase }">${database.nameDatabase }</option>
 								</c:forEach>
 							</select>
 						</div>
 						<div class="col-sm-12 col-md-3">
-							<label>Programing Language</label> <select>
+							<label>Programing Language</label><br>
+							<select class="form-control" name="language">
 								<c:forEach items="${listLanguage}" var="language">
-									<option>${language.nameLanguage }</option>
+									<option value="${language.idLanguage }">${language.nameLanguage }</option>
 								</c:forEach>
 							</select>
+						</div>
+						<div class="col-sm-12 col-md-3">
+							<label>Status</label>
+							<form:select path="status">
+								<form:option value="1">đang thực hiện</form:option>
+							</form:select>
+						</div>
+						<div class="col-md-3">
+							<label>Project Manager</label>
+							<form:select path="projectManager">
+								<form:option value="1">Trí</form:option>
+							</form:select>
+						</div>
+						<div class="col-md-12">
+							<form:textarea path="describes" />
 						</div>
 					</div>
 					<div class="row">

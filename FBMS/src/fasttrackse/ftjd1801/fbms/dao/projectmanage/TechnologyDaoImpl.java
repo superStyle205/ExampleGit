@@ -11,33 +11,32 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import fasttrackse.ftjd1801.fbms.entity.projectmanage.ProgramingLanguage;
+import fasttrackse.ftjd1801.fbms.entity.projectmanage.Technology;
 
 @Repository
-public class ProgramingLanguageDaoImpl extends AbstractDao<Integer, ProgramingLanguage>
-		implements ProgramingLanguageDao {
+public class TechnologyDaoImpl extends AbstractDao<Integer, Technology> implements TechnologyDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public ProgramingLanguage findById(int id) {
+	public Technology findById(int id) {
 		return getByKey(id);
 	}
 
 	@Override
-	public void addNew(ProgramingLanguage pl) {
+	public void addNew(Technology tech) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.persist(pl);
+		session.persist(tech);
 		tx.commit();
 		session.close();
 	}
 
 	@Override
-	public void update(ProgramingLanguage pl) {
+	public void update(Technology tech) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.update(pl);
+		session.update(tech);
 		tx.commit();
 		session.close();
 	}
@@ -46,27 +45,28 @@ public class ProgramingLanguageDaoImpl extends AbstractDao<Integer, ProgramingLa
 	public void delete(int id) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.delete(session.get(ProgramingLanguage.class, id));
+		session.delete(session.get(Technology.class, id));
 		tx.commit();
 		session.close();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProgramingLanguage> listAll(String search) {
+	public List<Technology> listAll(String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("nameLanguage", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("nameTechnology", "%" + search + "%");
 		criteria.add(cond);
-		return (List<ProgramingLanguage>) criteria.list();
+		return (List<Technology>) criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ProgramingLanguage> listForPagination(int fromIndex, int toIndex, String search) {
+	public List<Technology> listForPagination(int fromIndex, int toIndex, String search) {
 		Criteria criteria = createEntityCriteria();
-		Criterion cond = Restrictions.ilike("nameLanguage", "%" + search + "%");
+		Criterion cond = Restrictions.ilike("nameTechnology", "%" + search + "%");
 		criteria.add(cond);
-		return (List<ProgramingLanguage>) criteria.list().subList(fromIndex, toIndex);
+		return (List<Technology>) criteria.list().subList(fromIndex, toIndex);
+		
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,8 @@ public class RoleAllController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addForm(Model model) {
 		model.addAttribute("role", new RoleAll());
-		return "/QuanLyDuAn/role/add_form";
+		model.addAttribute("edit", false);
+		return "/QuanLyDuAn/role/form";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -48,7 +50,8 @@ public class RoleAllController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editForm(@PathVariable("id") int id, Model model) {
 		model.addAttribute("role", service.findById(id));
-		return "/QuanLyDuAn/role/edit_form";
+		model.addAttribute("edit", true);
+		return "/QuanLyDuAn/role/form";
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
@@ -62,14 +65,21 @@ public class RoleAllController {
 		}
 		return "redirect:/QuanLyDuAn/VaiTro/list-vaiTro";
 	}
-	
-	@RequestMapping(value = "/delete/{id}",method=RequestMethod.GET)
-	public String delete(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable("id") int id, ModelMap model) {
+		model.addAttribute("role", service.findById(id));
+		model.addAttribute("delete", true);
+		return "/QuanLyDuAn/role/form";
+	}
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+	public String doDelete(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
 		try {
 			service.delete(id);
-			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công ..");
+			redirectAttributes.addFlashAttribute("messageSuccess", "Thành công ...");
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("messageError", "Lỗi, xin thử lại ..");
+			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Thử lại..");
 		}
 		return "redirect:/QuanLyDuAn/VaiTro/list-vaiTro";
 	}

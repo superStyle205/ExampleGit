@@ -46,7 +46,7 @@ public class RoleAllDaoImpl extends AbstractDao<Integer, RoleAll> implements Rol
 	public void delete(int id) {
 		Session session = this.sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.delete(session.get(Project.class, id));
+		session.delete(session.get(RoleAll.class, id));
 		tx.commit();
 		session.close();
 	}

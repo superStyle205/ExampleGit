@@ -125,7 +125,12 @@ public class DatabaseController {
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("messageError", "Lỗi. Xin thử lại!");
 		}
-		return "redirect:/QuanLyDuAn/KhachHang/list-database";
+		return "redirect:/QuanLyDuAn/Database/list-database";
+	}
+	@RequestMapping(value="/view/{idDatabase}", method = RequestMethod.GET)
+	public String viewOne (@PathVariable("idDatabase") int idDatabase,ModelMap model) {
+		model.addAttribute("database", databaseService.findById(idDatabase));
+		return "QuanLyDuAn/database/viewOne";
 	}
 
 }

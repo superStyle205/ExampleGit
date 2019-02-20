@@ -124,7 +124,6 @@
 											<tr>
 												<th>Mã framework</th>
 												<th>Tên framework</th>
-												<th>Mô tả</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -133,8 +132,9 @@
 												<tr>
 													<td>${framework.idFramework }</td>
 													<td>${framework.technology }</td>
-													<td>${framework.describes }</td>
 													<td><a
+														href="<c:url value='/QuanLyDuAn/Framework/list-framework/view/${framework.idFramework}' />"><i
+															class='fa fa-eye'></i></a> <a
 														href="<c:url value='/QuanLyDuAn/Framework/list-framework/edit/${framework.idFramework}' />"><i
 															class='fa fa-pencil'></i></a> <a
 														href="<c:url value='/QuanLyDuAn/Framework/list-framework/delete/${framework.idFramework}' />"><i
